@@ -1,0 +1,136 @@
+.Main{
+    display: grid;
+    grid-template-columns: repeat(12,1fr);
+    max-width: 360px;
+    margin-top: 60px;
+    height: 100vh;
+}
+
+/* left div styles for  mobile */
+.Left{
+ grid-column:1/7;
+ display: flex;
+ flex-direction: column;
+}
+p{
+    margin: 0px;
+}
+.Text1{
+    font-size: 25px;
+    font-weight: bold;
+    font-family: Segoe UI;
+    padding: 5px;
+    margin-left: 15px;
+}
+.Text2{
+    font-size: 25px;
+    font-weight: bold;
+    font-family: Segoe UI;
+    padding: 5px;
+    margin-left: 15px;
+}
+.ButtonDiv{
+  margin-left: 20px;
+  margin-top: 70px;
+}
+
+/* right div styles for mobile*/
+.Right{
+    grid-column:7/13;
+    background: url('./../../Assets/chapat.jpg') no-repeat;
+    background-size: cover;
+    border-radius: 80px 0px 0px 0px;
+}
+
+
+@media screen and (min-width: 400px){
+    .Main{
+        max-width: 1200px;
+    }
+    .Text1,.Text2{
+        font-size: 35px;
+    }
+    .Left{
+        grid-column:1/10;
+    }
+    .Right{
+        grid-column:10/13;
+       }
+    .ButtonDiv Button{
+        margin-right: 10px;
+    }
+    
+}
+
+
+@media screen and (min-width: 858px){
+    
+    .Text1,.Text2{
+        font-size: 40px;
+        margin-left: 100px;
+    }
+    .ButtonDiv{
+        margin-left: 100px;
+    }
+    .ButtonDiv Button{
+        margin-right: 10px;
+      }
+    
+    .Left{
+        grid-column:1/8;
+       }
+    .Right{
+        grid-column:8/13;
+       }
+    
+}
+
+/*tablets and small laptops*/
+@media screen and (min-width: 960px){
+    .Main{
+        max-width: 1200px;
+    }
+    .Text1,.Text2{
+        font-size: 50px;
+        margin-left: 80px;
+    }
+    .ButtonDiv{
+        margin-left: 90px;
+      }
+      .ButtonDiv Button{
+        margin-right: 10px;
+      }
+    .Left{
+        grid-column:1/8;
+    }
+    .Right{
+        grid-column:8/13;
+        background-size: cover;
+        border-radius: 80px 0px 0px 0px;
+    }
+   
+}
+
+/*Desktop styles*/
+@media screen and (min-width: 1200px){
+    .Main{
+        max-width: 100%;
+    }
+    .Text1,.Text2{
+        font-size: 60px;
+        margin-left: 150px;
+    }
+    .ButtonDiv{
+        margin-left: 155px;
+      }
+    .ButtonDiv Button{
+        margin-right: 10px;
+      }
+    .Left{
+        grid-column:1/8;
+      }
+    .Right{
+        grid-column:8/13;
+        border-radius: 100px 0px 0px 0px;
+       }
+}

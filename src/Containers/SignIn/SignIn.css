@@ -1,0 +1,191 @@
+.SignInMain{
+    display: grid;
+    grid-template-columns: repeat(12,1fr);
+    max-width: 360px;
+    margin-top: 60px;
+    height: 75.6vh;
+    font-size: 4px;
+}
+
+.SignInSection{
+    grid-column: 1/9;
+}
+
+.SignInSection form{
+    display: flex;
+    flex-direction: column;
+    margin: 70px 20px 0px 20px;
+}
+
+.ImageSection{
+    grid-column: 9/13;
+    background: url('./../../Assets/chapat.jpg') no-repeat;
+    background-size: cover;
+    border-radius: 80px 0px 0px 0px;
+}
+
+.SignBtnHolder{
+    display: flex;
+    flex-direction: column;
+}
+
+input[type=email]{
+    border-bottom: 1px solid #A57B08;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+}
+
+
+input[type=password]{
+    border-bottom: 1px solid #A57B08;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+}
+
+input[type=email]:focus{
+    border-bottom: 3px solid #A57B08;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    outline: none;
+    box-shadow: none;
+}
+
+input[type=password]:focus{
+    border-bottom: 3px solid #A57B08;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    outline: none;
+    box-shadow: none;
+}
+input[type=text]:focus{
+    border-bottom: 3px solid #A57B08;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    outline: none;
+    box-shadow: none;
+}
+
+.label1{
+    color:#A57B08;
+    font-weight: bold;
+    font-size: 5em;
+}
+
+.label2{
+    color:#A57B08;
+    font-size: 3em;
+}
+
+.label3{
+    color:#A57B08;
+    font-size: 3em;
+}
+
+@media screen and (min-width: 400px){
+    .SignInMain{
+        max-width: 1200px;
+        height: 73vh;
+    }
+
+    .SignInSection form{
+        margin: 70px 20px 0px 40px;
+    }
+    .SignBtnHolder{
+        flex-direction: row;
+    }
+    .label1{
+        font-size: 5em;
+    }
+    .label3{
+        margin-top:40px;
+        margin-left:10px;
+        font-size: 3em;
+    }
+    .label2{
+        font-size: 3em;
+    }
+    
+}
+
+@media screen and (min-width: 700px){
+    .SignInMain{
+        max-width:100%;
+    }
+    .SignInSection{
+        margin: 10px 40px 0px 30px;
+    }
+    .SignBtnHolder{
+        flex-direction: row;
+    }
+    .label1{
+        font-size: 5em;
+    }
+    .label3{
+        margin-top:40px;
+        margin-left:10px;
+        font-size: 3em;
+    }
+    .label2{
+        font-size: 3em;
+    }
+    
+}
+
+@media screen and (min-width: 960px){
+    .SignInMain{
+        max-width: 100%;
+        height: 73vh;
+    }
+    .SignInSection{
+        margin: 10px 100px 0px 90px;
+    }
+    .SignBtnHolder{
+        flex-direction: row;
+    }
+    .label1{
+        font-size: 5em;
+    }
+    .label3{
+        margin-top:40px;
+        margin-left:10px;
+        font-size: 3em;
+    }
+    .label2{
+        font-size: 3em;
+    }
+
+}
+
+@media screen and (min-width:1200px){
+    .SignInMain{
+        max-width: 100%;
+        height: 75.6vh;
+    }
+    .ImageSection{
+        border-radius: 100px 0px 0px 0px;
+        height: 75.6vh;
+    }
+
+    .SignInSection{
+        margin: 10px 200px 0px 140px;
+    }
+    .SignBtnHolder{
+        flex-direction: row;
+    }
+    .label1{
+        font-size: 5em;
+    }
+    .label3{
+        margin-top:40px;
+        margin-left:10px;
+        font-size: 3em;
+    }
+    .label2{
+        font-size: 3em;
+    }
+}

@@ -1,15 +1,20 @@
 import React from 'react';
 import './Toolbar.css';
+import {withRouter} from 'react-router-dom';
 
 
 const toolbar = (props) =>{
+
+    const loadHome = ()=> {
+        props.history.push('/');
+    };
 
     return (
         <React.Fragment>
 
             <div className="Toolbar">
                 <div className="Title">
-                    <h4>TUULYE</h4>
+                    <h4 onClick={loadHome}>TUULYE</h4>
                 </div>
                 <div className="Navigation">
                     <ul>
@@ -25,4 +30,4 @@ const toolbar = (props) =>{
 }
 
 
-export default toolbar;
+export default withRouter(toolbar);

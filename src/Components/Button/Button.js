@@ -43,8 +43,42 @@ const button = props =>{
             }
         }
     }
+    //signIn button on sign in screen
+    if(props.buttonClass === 'SignInScreenBtn'){
+        styles ={
+            backgroundColor: '#FE960E',
+            width:'100px',
+            height:'50px',
+            border:'none',
+            borderRadius:'50px',
+            color:'white',
+            fontWeight:'bold',
+            padding:'5px',
+            outline:'none',
+            fontSize:'20px',
+            marginTop:'25px'
+        }
+    }
+    //Join button on join screen
+    if(props.buttonClass === 'JoinScreenBtn'){
+        styles ={
+            backgroundColor: '#FE960E',
+            width:'100px',
+            height:'50px',
+            border:'none',
+            borderRadius:'50px',
+            color:'white',
+            fontWeight:'bold',
+            padding:'5px',
+            outline:'none',
+            fontSize:'20px',
+            marginTop:'25px'
+        }
+    }
+
+
  return(
-     <button style={styles}>{props.children}</button>
+     <button style={styles} onClick={props.click}> {props.children} </button>
  );
 };
 

@@ -84,6 +84,7 @@ input[type=text]:focus{
 .label3{
     color:#A57B08;
     font-size: 3em;
+    padding-top: 5px;
 }
 
 @media screen and (min-width: 400px){
@@ -183,9 +184,27 @@ input[type=text]:focus{
     .label3{
         margin-top:40px;
         margin-left:10px;
-        font-size: 3em;
+        font-size: 3.5em;
     }
     .label2{
-        font-size: 3em;
+        font-size: 3.5em;
     }
+}
+
+
+
+/* HANDLING ERRRORS */
+
+.invalidField{
+    border-bottom: 2px solid red !important;
+}
+.invalidTextArea{
+    border: 2px solid red !important;
+}
+.textDanger{
+    color: red !important;
+    text-align: center;
+    justify-self: center;
+    font-size: 4em;
+    padding: 1px;
 }

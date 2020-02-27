@@ -112,4 +112,7 @@ input[type=radio]{
     .JoinRight{
         border-radius: 100px 0px 0px 0px;
     }
+    .l7{
+        font-size: 3.5em;
+    }
 }

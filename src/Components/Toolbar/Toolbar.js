@@ -1,6 +1,7 @@
 import React from 'react';
 import './Toolbar.css';
-import {withRouter} from 'react-router-dom';
+import {withRouter, NavLink} from 'react-router-dom';
+
 
 
 const toolbar = (props) =>{
@@ -18,9 +19,15 @@ const toolbar = (props) =>{
                 </div>
                 <div className="Navigation">
                     <ul>
-                        <li>About</li>
-                        <li>FAQ</li>
-                        <li>Contact</li>
+                        <li>
+                            <NavLink to='/about' exact activeClassName='activeLink' >About</NavLink>
+                        </li>
+                        <li>
+                            <NavLink to='/faq' exact activeClassName='activeLink'  >FAQ</NavLink>
+                        </li>
+                        <li>
+                            <NavLink to='contact' exact activeClassName='activeLink' >Contact</NavLink>
+                        </li>
                     </ul>
                 </div>
             </div>

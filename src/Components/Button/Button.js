@@ -76,9 +76,30 @@ const button = props =>{
         }
     }
 
+    //Send us a message button on contact page 
+    if(props.buttonClass === 'Contact'){
+        styles ={
+            backgroundColor: '#FE960E',
+            width:'100%',
+            height:'50px',
+            border:'none',
+            borderRadius:'50px',
+            color:'white',
+            fontWeight:'bold',
+            padding:'5px',
+            outline:'none',
+            fontSize:'15px',
+            marginTop:'15px'
+        }
+    }
+
 
  return(
-     <button style={styles} onClick={props.click}> {props.children} </button>
+     <button 
+        style={styles} 
+        onClick={props.click} 
+        disabled={props.disabled}
+        type={props.type}> {props.children} </button>
  );
 };
 

@@ -1,0 +1,99 @@
+.ContactMain{
+    display: grid;
+    grid-template-columns: repeat(12,1fr);
+    max-width: 360px;
+    margin-top: 60px;
+    height: 75.6vh;
+    font-size: 4px;
+}
+
+.ContactLeft{
+    grid-column: 1/9;
+
+}
+.ContactRight{
+    grid-column: 9/13;
+    background: url('./../../Assets/chapat.jpg') no-repeat;
+    background-size: cover;
+    border-radius: 80px 0px 0px 0px;
+}
+.ContactLeft form{
+    display: flex;
+    flex-direction: column;
+    margin: 70px 20px 0px 20px;
+}
+
+.ContactLabel1{
+    color:#A57B08;
+    font-weight: bold;
+    font-size: 5em;
+}
+
+.ContactLabel2{
+    color:#A57B08;
+    font-weight: bold;
+    font-size: 5em;
+    padding: 1em 0em;
+}
+
+textarea{
+    border: 1px solid #A57B08;
+    outline: none;
+    box-shadow: none;
+}
+
+textarea:focus{
+    border: 3px solid #A57B08;
+    outline: none;
+    box-shadow: none;
+}
+
+@media screen and (min-width: 400px){
+    .ContactMain{
+        max-width: 1200px;
+        height: 73vh;
+    }
+
+    .ContactLeft form{
+        margin: 70px 20px 0px 40px;
+    }
+
+    
+}
+
+@media screen and (min-width: 700px){
+    .ContactMain{
+        max-width:100%;
+    }
+    .ContactLeft{
+        margin: 10px 40px 0px 30px;
+    }
+    
+}
+
+
+@media screen and (min-width: 960px){
+    .ContactMain{
+        max-width: 100%;
+        height: 73vh;
+    }
+    .ContactLeft{
+        margin: 10px 100px 0px 90px;
+    }
+
+}
+
+@media screen and (min-width:1200px){
+    .ContactMain{
+        max-width: 100%;
+        height: 75.6vh;
+    }
+    .ContactLeft{
+        margin: 40px 120px 0px 120px;
+    }
+
+    .ContactRight{
+        border-radius: 100px 0px 0px 0px;
+    }
+   
+}

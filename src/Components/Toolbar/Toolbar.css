@@ -61,6 +61,16 @@
    
 }
 
+a{
+    text-decoration: none;
+    color:black;
+}
+a:hover{
+    color:rgb(238, 154, 121);    
+}
+.activeLink{
+    color: #F30B0B !important;
+}
 /*Desktop styles*/
 @media screen and (min-width: 1200px){
     .Toolbar{

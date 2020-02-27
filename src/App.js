@@ -5,6 +5,9 @@ import {StyleRoot}from 'radium';
 import {Route,Switch} from 'react-router-dom';
 import SignIn from './Containers/SignIn/SignIn';
 import Join from './Containers/Join/Join';
+import About from './Components/About/About';
+import FAQ from './Components/FAQ/FAQ';
+import Contact from './Containers/Contact/Contact';
 
 function App() {
   return (
@@ -14,6 +17,9 @@ function App() {
           <Route path='/' exact component={Landing}/>
           <Route path='/signin' component={SignIn}/>
           <Route path='/join' component={Join}/>
+          <Route path='/about' component={About}/>
+          <Route path='/faq' component={FAQ}/>
+          <Route path='/contact' component={Contact}/>
         </Switch>
       </Layout>
    </StyleRoot>

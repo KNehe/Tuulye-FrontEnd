@@ -1,0 +1,23 @@
+.MealCard{
+    width: 12em;
+}
+
+.CardImage img{
+  max-width: 200px;
+  max-height: 100%;
+  border-radius: 0px 0px 40px 0px;
+
+}
+
+.CardText{
+    color: #984639;
+    font-family: 'Segoe UI';
+    font-size: 1.2em;
+}
+.CardName{
+    font-weight: bold;
+}
+
+.CardPrice{
+    padding-left: 1em;
+}

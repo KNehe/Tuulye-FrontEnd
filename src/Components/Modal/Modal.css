@@ -1,0 +1,33 @@
+.ModalMessage{
+    background-color: #C23600;
+    color: white;
+    box-sizing: border-box;
+    border-radius: 0px 0px 50px 0px;
+    transition: all 0.2s ease-out;
+    z-index: 200;
+    max-width: 50%;
+    max-height: 50%;
+    text-align: center;
+    padding: 1em;
+    position: fixed;
+    top:40vh;
+    left:30vw;
+    right: 20vw;
+}
+
+.ModalError{
+    background-color: rgb(73, 71, 70);
+    color: white;
+    box-sizing: border-box;
+    border-radius: 0px 0px 50px 0px;
+    transition: all 0.2s ease-out;
+    z-index: 200;
+    max-width: 50%;
+    max-height: 50%;
+    text-align: center;
+    padding: 1em;
+    position: fixed;
+    top:40vh;
+    left:20vw;
+    right: 20vw;
+}

@@ -1,0 +1,185 @@
+.ChosenMain{
+    max-width: 360px;
+    display: flex;
+    flex-direction: column;
+}
+
+.ChosenLeft{
+    margin-top: 2em;
+    align-self: center;
+}
+.CTitle{
+    font-size: 1.5em;
+}
+
+.ChosenRight{
+    align-self: center;
+    margin-top: 2em;
+}
+
+.InputsPay{
+    display: flex;
+    flex-direction: column;
+    padding: 1.2em;
+}
+
+#airtelLabel,#mtnLabel{
+    font-size: 1.2em;
+    font-weight: bold;
+}
+#airtelLabel{
+    color: #F30B0B;
+}
+#mtnLabel{
+    color: #9F9A09;
+}
+#pinLabel{
+    margin-top: 1em;
+}
+
+
+
+@media screen  and (min-width:400px){
+
+    .ChosenLeft{
+        align-self: flex-start;
+        margin-left: 2em;
+    }
+
+    .SpaceBox{
+        padding: 0.2em;
+    }
+
+}
+
+
+@media screen  and (min-width:500px){
+    .ChosenLeft{
+        align-self: stretch;
+        margin-left: 2.5em;
+    }
+    .ChosenRight{
+        align-self: flex-start;
+        margin-left: 2em;
+    }
+
+}
+
+
+@media screen  and (min-width:600px){
+    .ChosenMain{
+        max-width: 100%;
+        flex-direction: row;
+    }
+    .ChosenLeft{
+        align-self: stretch;
+        margin-left: 3.6em;
+
+    }
+    .ChosenRight{
+        align-self: flex-start;
+        margin-left: 2em;
+        margin-top: 7.5em;
+    }
+    
+
+}
+
+
+@media screen  and (min-width:700px){
+    .ChosenMain{
+        max-width: 100%;
+        flex-direction: row;
+        
+    }
+    .ChosenLeft{
+        align-self: stretch;
+        margin-left: 5em;
+
+    }
+    .ChosenRight{
+        align-self: flex-start;
+        margin-left: 2em;
+    }
+
+}
+
+
+@media screen  and (min-width:800px){
+    .ChosenMain{
+        max-width: 100%;
+        flex-direction: row;
+    }
+
+    .ChosenLeft{
+        align-self: stretch;
+        margin-left: 6em;
+
+    }
+    .ChosenRight{
+        align-self: flex-start;
+        margin-left: 2em;
+    }
+
+}
+
+
+
+@media screen  and (min-width:960px){
+    .ChosenMain{
+        max-width: 100%;
+        display: grid;
+        grid-template-columns: repeat(12,1fr);
+        padding-right: 1em;
+        
+    }
+    .ChosenLeft{
+        margin-left: 7.5em;
+        grid-column: 1/6;
+    }
+    .ChosenRight{
+        grid-column: 6/13;
+    }
+
+    .InputsPay{
+        width: 60%;
+    }
+    
+
+}
+
+
+
+@media screen  and (min-width:960px){
+    .ChosenMain{
+        max-width: 100%;
+        display: grid;
+        grid-template-columns: repeat(12,1fr);
+      
+    }
+    .ChosenLeft{
+        margin-left: 9.7em;
+        grid-column: 1/8;
+        align-self: flex-start;
+        
+    }
+    .ChosenRight{
+        grid-column: 8/13;
+        margin-top: 10em;
+        align-self: flex-start;
+    }
+
+    .InputsPay{
+        width: 70%;
+        margin-left: -100px;
+    }
+    .Radios{
+        margin-left: -90px;
+    }
+
+    .CTitle{
+        font-size: 2em;
+    }
+   
+
+}

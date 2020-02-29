@@ -2,6 +2,8 @@ import React ,{useState}from 'react';
 import './Join.css';
 import Button from './../../Components/Button/Button';
 import ValidateEmail from './../../Utils/EmailValidation';
+import axios from './../../Axios/axios';
+
 
 
 const  Join= (props) =>{
@@ -56,6 +58,18 @@ const  Join= (props) =>{
     //Form validation ans submition
     const onFormSubmittedHandler = event=>{
         event.preventDefault();
+        
+        if(formState.name.trim() === '' && formState.email.trim() === '' && formState.phone.trim() === '' 
+           && formState.gender.trim() === '' && formState.password.trim() === '')
+        {
+            setInputErrorClasses({ nameErrorClass:'invalidField',
+                                    emailErrorClass:'invalidField',
+                                    phoneErrorClass:'invalidField',
+                                    passwordErrorClass:'invalidField',
+                                    genderErrorClass:'invalidField'});
+                                    
+            return setErrorMessage('All fields are required');  
+        }
 
         if(formState.name.trim() === '')
         {
@@ -71,7 +85,7 @@ const  Join= (props) =>{
         
         if(formState.email.trim() === '')
         {
-            setInputErrorClasses({ emailErrorClass:'invalidField'})
+            setInputErrorClasses({ emailErrorClass:'invalidField'});
             return setErrorMessage('Email is required');
         }
 
@@ -111,7 +125,15 @@ const  Join= (props) =>{
          setErrorMessage('');
 
          //submit to server
-         console.log(formState)
+         axios.post('/users/signup',formState)
+         .then( response =>{
+             localStorage.setItem('authToken',response.data.token);
+             props.history.push('/meals');
+         })
+         .catch(error =>{
+             setErrorMessage('Email already in use!'); 
+             console.log("JOIN ERROR", error);
+         });
 
     };
 

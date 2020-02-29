@@ -17,7 +17,7 @@ const button = props =>{
             fontWeight:'bold',
             padding:'5px',
             outline:'none',
-            fontSize:'20px',
+            fontSize:'15px',
             '@media screen and (min-width: 360px)':{
                 marginTop: '-20px'
             }
@@ -34,7 +34,7 @@ const button = props =>{
             color:'white',
             fontWeight:'bold',
             padding:'5px',
-            fontSize:'20px',
+            fontSize:'15px',
             outline:'none',
             marginLeft:'10px',
             '@media (min-width: 360px)':{
@@ -55,7 +55,7 @@ const button = props =>{
             fontWeight:'bold',
             padding:'5px',
             outline:'none',
-            fontSize:'20px',
+            fontSize:'15px',
             marginTop:'25px'
         }
     }
@@ -71,7 +71,7 @@ const button = props =>{
             fontWeight:'bold',
             padding:'5px',
             outline:'none',
-            fontSize:'20px',
+            fontSize:'15px',
             marginTop:'25px'
         }
     }
@@ -90,6 +90,23 @@ const button = props =>{
             outline:'none',
             fontSize:'15px',
             marginTop:'15px'
+        }
+    }
+
+       //Pay button on chosenMeal page
+       if(props.buttonClass === 'Pay'){
+        styles ={
+            backgroundColor: '#FE960E',
+            width:'100px',
+            height:'50px',
+            border:'none',
+            borderRadius:'50px', 
+            fontWeight:'bold',
+            padding:'5px',
+            outline:'none',
+            fontSize:'15px',
+            marginTop:'15px',
+            color:'white'
         }
     }
 

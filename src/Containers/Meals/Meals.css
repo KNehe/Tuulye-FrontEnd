@@ -1,0 +1,115 @@
+.Meals{
+    display: flex;
+    flex-direction: column;
+    max-width: 360px;
+    padding: 0em 0em 0em 5em;
+}
+
+
+
+
+@media screen and (min-width:400px)
+{   
+    .Meals{
+        max-width: 1200px;
+        display: grid;
+        grid-template-columns: repeat(2,1fr);
+        gap:1em;
+        padding: 0em 0em 0em 2em;
+    }
+
+    .MealHeader{
+        display: grid;
+        grid-template-columns: repeat(12,1fr);
+        padding: 0em 0em 0em 2em;
+    }
+
+    .MealTitle{
+        font-size: 2em;
+        grid-column: 1/10;
+    }
+}
+
+@media screen and (min-width:700px)
+{   
+    .Meals{
+        max-width: 100%;
+        grid-template-columns: repeat(12,1fr);
+        gap:0.2em;
+    }
+
+    .MealCard{
+        width: 15em;
+    }
+    
+    .CardImage img{
+      max-width: 200px;
+    }
+
+   
+    
+
+}
+
+@media screen and (min-width: 960px){
+    .Meals{
+        max-width: 100%;
+        grid-template-columns: repeat(12,1fr);
+        gap: 70px;
+        padding: 0em 0em 0em 8em;
+    }
+    .MealCard{
+        width: 10em;
+    }
+    
+    .CardImage img{
+      max-width: 200px;
+    }
+    
+    .CardText{
+        font-size: 1.5em;
+    }
+
+    .MealHeader{
+        display: grid;
+        grid-template-columns: repeat(12,1fr);
+        padding: 0em 0em 0em 8em;
+    }
+
+    .MealTitle{
+        font-size: 2em;
+        grid-column: 1/10;
+    }
+}
+
+@media screen and (min-width:1200px){
+    .Meals{
+        max-width: 100%;
+        grid-template-columns: repeat(12,1fr);
+        gap: 50px;
+        padding: 0em 0em 0em 10em;
+    }
+    .MealCard{
+        width: 20em;
+    }
+    
+    .CardImage img{
+      max-width: 350px;
+    }
+    
+    .CardText{
+        font-size: 1.5em;
+    }
+
+    .MealHeader{
+        display: grid;
+        grid-template-columns: repeat(12,1fr);
+        margin: 10px 0px 0px 30px;
+    }
+
+    .MealTitle{
+        font-size: 3em;
+        grid-column: 1/10;
+    }
+
+}

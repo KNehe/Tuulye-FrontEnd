@@ -2,6 +2,7 @@ import React,{useState} from 'react';
 import './SignIn.css';
 import Button from './../../Components/Button/Button';
 import ValidateEmail from './../../Utils/EmailValidation';
+import axios from './../../Axios/axios';
 
 const SignIn = props =>{
    
@@ -40,29 +41,34 @@ const SignIn = props =>{
 
     const onSubmitFormHandler = event=>{
         event.preventDefault();
-        const oldErrorState = {...inputErrorClasses}
         
+        if(formState.email.trim() === '' && formState.password.trim() === '')
+        {
+            setInputErrorClasses({ emailErrorClass:'invalidField', passwordErrorClass: 'invalidField' });
+            return setErrorMessage('All fields are required');
+        }
+
         if(formState.email.trim() === '')
         {
-            setInputErrorClasses({ emailErrorClass:'invalidField', passwordErrorClass: oldErrorState.passwordErrorClass})
+            setInputErrorClasses({ emailErrorClass:'invalidField'});
             return setErrorMessage('Email is required');
         }
 
         if(!ValidateEmail(formState.email.trim()))
         {
-            setInputErrorClasses({ emailErrorClass:'invalidField', passwordErrorClass: oldErrorState.passwordErrorClass})
+            setInputErrorClasses({ emailErrorClass:'invalidField'});
             return setErrorMessage('Invalid Email');
         }      
 
         if(formState.password.trim() === '')
         {
-            setInputErrorClasses({ passwordErrorClass:'invalidField', emailErrorClass: oldErrorState.emailErrorClass})
+            setInputErrorClasses({ passwordErrorClass:'invalidField'});
             return setErrorMessage('Password is required');  
         }
 
         if(formState.password.trim().length < 6)
         {
-            setInputErrorClasses({ passwordErrorClass:'invalidField', emailErrorClass: oldErrorState.emailErrorClass})
+            setInputErrorClasses({ passwordErrorClass:'invalidField'})
             return setErrorMessage('Password Must be atleast 6 characters');   
         }
 
@@ -70,7 +76,16 @@ const SignIn = props =>{
          setInputErrorClasses('');
          setErrorMessage('');
 
-         //submit to server
+          //submit to server
+          axios.post('/users/login',formState)
+          .then( response =>{
+              localStorage.setItem('authToken',response.data.token);
+              props.history.push('/meals');
+          })
+          .catch(error =>{
+              setErrorMessage('Invalid Credentials!!!'); 
+              console.log("SIGNIN ERROR", error);
+          });
 
     };
     

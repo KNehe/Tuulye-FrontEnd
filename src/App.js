@@ -8,6 +8,8 @@ import Join from './Containers/Join/Join';
 import About from './Components/About/About';
 import FAQ from './Components/FAQ/FAQ';
 import Contact from './Containers/Contact/Contact';
+import Meals from './Containers/Meals/Meals';
+import ChosenMeal from './Containers/ChosenMeal/ChosenMeal';
 
 function App() {
   return (
@@ -20,6 +22,8 @@ function App() {
           <Route path='/about' component={About}/>
           <Route path='/faq' component={FAQ}/>
           <Route path='/contact' component={Contact}/>
+          <Route path='/meals' component={Meals}/>
+          <Route path='/chosenmeal/:id' component={ChosenMeal} />
         </Switch>
       </Layout>
    </StyleRoot>

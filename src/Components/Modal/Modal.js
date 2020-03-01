@@ -22,7 +22,7 @@ const modal = props =>{
 
             <div 
                 className={cssClass}
-                style={ { opacity:props.show? '1': '0'}}
+                style={ { opacity:props.show? '1': '0', display:props.show? null:'none'}}
             >
              {props.children}
             </div>

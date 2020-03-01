@@ -1,0 +1,28 @@
+.NotificationSuccess{
+    background-color: #C23600;
+    color: white;
+    transition: all 1s  ease-in-out;
+    z-index: 200;
+    max-width: 50%;
+    height: auto;
+    text-align: center;
+    position: fixed;
+    top:5vh;
+    left:70vw;
+    right: 0vw;
+}
+
+
+.NotificationDanger{
+    background-color: rgb(34, 24, 20);
+    color: white;
+    transition: all 1s  ease-in-out;
+    z-index: 200;
+    max-width: 50%;
+    height: auto;
+    text-align: center;
+    position: fixed;
+    top:5vh;
+    left:70vw;
+    right: 0vw;
+}

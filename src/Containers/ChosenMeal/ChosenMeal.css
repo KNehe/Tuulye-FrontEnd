@@ -24,7 +24,7 @@
 }
 
 #airtelLabel,#mtnLabel{
-    font-size: 1.2em;
+    font-size: 1.1em;
     font-weight: bold;
 }
 #airtelLabel{
@@ -35,6 +35,10 @@
 }
 #pinLabel{
     margin-top: 1em;
+}
+.textError{
+    color: red;
+    margin-bottom: 5px;
 }
 
 
@@ -150,7 +154,7 @@
 
 
 
-@media screen  and (min-width:960px){
+@media screen  and (min-width:1200px){
     .ChosenMain{
         max-width: 100%;
         display: grid;

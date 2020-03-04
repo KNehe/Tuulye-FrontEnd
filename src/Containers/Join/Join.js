@@ -18,6 +18,8 @@ const  Join= (props) =>{
 
     const [errorMessage, setErrorMessage] = useState('');
 
+    const [showSpinner,setSpinner] = useState(false);
+
 
     const loadSignInPage = ()=>{
         props.history.push('/signin');
@@ -124,14 +126,18 @@ const  Join= (props) =>{
          setInputErrorClasses('');
          setErrorMessage('');
 
+         setSpinner(true);
+
          //submit to server
          axios.post('/users/signup',formState)
          .then( response =>{
              localStorage.setItem('authToken',response.data.token);
+             setSpinner(false);
              props.history.push('/meals');
          })
          .catch(error =>{
-             setErrorMessage('Email already in use!'); 
+             setErrorMessage('Email already in use!');
+             setSpinner(false);
              console.log("JOIN ERROR", error);
          });
 
@@ -201,7 +207,15 @@ const  Join= (props) =>{
                     </div>                  
                     
                     <div className='JoinBtnHolder'>
-                       <Button buttonClass='JoinScreenBtn' type='submit'>Join</Button>
+                       <Button 
+                            buttonClass='JoinScreenBtn' 
+                            type='submit'
+                        >
+                             { showSpinner? 
+                              <i className='fa fa-spinner fa-spin'></i>:
+                               'Join' 
+                            }
+                        </Button>
                        <label className='l7' onClick={loadSignInPage}>Already have an account?</label>
                      </div>
                 </form>

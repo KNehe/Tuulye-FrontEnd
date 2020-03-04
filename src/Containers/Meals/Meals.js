@@ -13,7 +13,7 @@ const Meals = props =>{
             setMealsState(result.data.data.meals);
         })
         .catch(err=>{
-           console.log("Meals.js",err);
+           console.log("Meals.js Error",err);
         });
 
     },[]);

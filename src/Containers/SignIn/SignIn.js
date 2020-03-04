@@ -3,6 +3,7 @@ import './SignIn.css';
 import Button from './../../Components/Button/Button';
 import ValidateEmail from './../../Utils/EmailValidation';
 import axios from './../../Axios/axios';
+import {connect} from 'react-redux';
 
 const SignIn = props =>{
    
@@ -11,6 +12,8 @@ const SignIn = props =>{
     const [inputErrorClasses, setInputErrorClasses] = useState({ emailErrorClass:'', passwordErrorClass:''});
 
     const [errorMessage, setErrorMessage] = useState('');
+
+    const [showSpinner,setSpinner] = useState(false);
 
     
     let labelStyle ={
@@ -76,14 +79,22 @@ const SignIn = props =>{
          setInputErrorClasses('');
          setErrorMessage('');
 
+         setSpinner(true);
+
           //submit to server
           axios.post('/users/login',formState)
           .then( response =>{
               localStorage.setItem('authToken',response.data.token);
+              localStorage.setItem('name',response.data.userData.name);
+              localStorage.setItem('role',response.data.userData.role);
+              console.log(response.data);
+              setSpinner(false);
+              props.onSetIsLoggedIn();
               props.history.push('/meals');
           })
           .catch(error =>{
-              setErrorMessage('Invalid Credentials!!!'); 
+              setErrorMessage('Invalid Credentials!!!');
+              setSpinner(false);
               console.log("SIGNIN ERROR", error);
           });
 
@@ -121,7 +132,11 @@ const SignIn = props =>{
                            buttonClass='SignInScreenBtn'
                            type='Submit'
                         >
-                           SignIn
+                            { showSpinner? 
+                              <i className='fa fa-spinner fa-spin'></i>:
+                               'SignIn' 
+                            }
+                           
                         </Button>
                        <label className='label3' onClick={loadJoinPage}>Create an account?</label>
                      </div>
@@ -136,5 +151,11 @@ const SignIn = props =>{
 
 };
 
+const mapDispatchToProps = dispatch =>{
 
-export default SignIn;
+    return{
+        onSetIsLoggedIn: ()=> dispatch({ type: 'LOGGED_IN', value:true})
+    };
+};
+
+export default connect(null,mapDispatchToProps)(SignIn);

@@ -12,6 +12,8 @@ const Contact = props =>{
 
     const [errorMessage, setErrorMessage] = useState('');
 
+    const [showSpinner, setSpinner] = useState(false);
+
     //saving  form data in state
     const onInputChangedHanlder = (event, inputName) =>{
 
@@ -34,6 +36,12 @@ const Contact = props =>{
     const onFormSubmittedHandler = event =>{
         event.preventDefault();
         
+        if(formState.email.trim() === '' && formState.message.trim() === '')
+        {
+            setInputErrorClasses({ emailErrorClass:'invalidField', messageErrorClass:'invalidFieldTextArea'})
+            return setErrorMessage('All fields are required');
+        }
+
         if(formState.email.trim() === '')
         {
             setInputErrorClasses({ emailErrorClass:'invalidField'})
@@ -62,8 +70,10 @@ const Contact = props =>{
          setInputErrorClasses('');
          setErrorMessage('');
 
+         setSpinner(true);
+
          //submit to server
-         console.log(formState);
+        //  console.log(formState);
     };
 
     return (
@@ -92,7 +102,16 @@ const Contact = props =>{
                         onChange={ (event)=> onInputChangedHanlder(event,'message')}
                     ></textarea>
 
-                    <Button buttonClass='Contact' type='Submit'>SEND US A MESSAGE</Button>
+                    <Button 
+                            buttonClass='Contact' 
+                            type='Submit'
+                    >
+                         { showSpinner? 
+                              <i className='fa fa-spinner fa-spin'></i>:
+                               'SEND US A MESSAGE' 
+                        }
+                                
+                    </Button>
                 </form>
 
 

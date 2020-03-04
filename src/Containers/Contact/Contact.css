@@ -11,6 +11,10 @@
     grid-column: 1/9;
 
 }
+
+.invalidFieldTextArea{
+    border: 2px solid red;
+}
 .ContactRight{
     grid-column: 9/13;
     background: url('./../../Assets/chapat.jpg') no-repeat;

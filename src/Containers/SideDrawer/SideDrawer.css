@@ -1,0 +1,35 @@
+.SideDrawer{
+    z-index: 200;
+    background-color: white;
+    height: 100vh;
+    position: absolute;
+    width: 400px;
+    transition: all 0.2s ease-out;
+    background-color: white; 
+}
+.DrawerHeader{
+    background-color: #F34B0B;
+    height: 200px;
+}
+.DrawerHeaderText{
+    text-align: center;
+    color: white;
+    padding: 60px;
+    font-weight: bold;
+    font-size: 3em;
+    
+}
+
+.DrawerContent{
+    margin-top: 20px;
+}
+
+.DrawerNavs{
+    list-style-type: none;
+}
+
+.DrawerNavItem{
+    padding: 15px;
+    font-weight: 900;
+    font-size: 1.2em;
+}

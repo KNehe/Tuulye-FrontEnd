@@ -55,7 +55,7 @@ textarea:focus{
 @media screen and (min-width: 400px){
     .ContactMain{
         max-width: 1200px;
-        height: 73vh;
+        height: 77.8vh;
     }
 
     .ContactLeft form{
@@ -90,7 +90,7 @@ textarea:focus{
 @media screen and (min-width:1200px){
     .ContactMain{
         max-width: 100%;
-        height: 75.6vh;
+        height: 78.8vh;
     }
     .ContactLeft{
         margin: 40px 120px 0px 120px;

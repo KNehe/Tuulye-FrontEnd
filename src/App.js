@@ -17,6 +17,7 @@ function App() {
       <Layout>
         <Switch>
           <Route path='/' exact component={Landing}/>
+          <Route path='/logout'  component={Landing}/>
           <Route path='/signin' component={SignIn}/>
           <Route path='/join' component={Join}/>
           <Route path='/about' component={About}/>

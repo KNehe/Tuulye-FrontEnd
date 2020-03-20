@@ -4,7 +4,7 @@ const instance = axios.create({
     baseURL: 'http://127.0.0.1:3000/api/v1/'
 });
 
-instance.defaults.headers['Authorization'] = 'Bearer ' + localStorage.getItem('authToken');
+instance.defaults.headers['authorization'] = 'Bearer ' + localStorage.getItem('authToken');
 
 instance.interceptors.request.use( request=>{
     // console.log("REQUEST",request);

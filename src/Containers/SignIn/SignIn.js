@@ -84,10 +84,11 @@ const SignIn = props =>{
           //submit to server
           axios.post('/users/login',formState)
           .then( response =>{
+              
               localStorage.setItem('authToken',response.data.token);
               localStorage.setItem('name',response.data.userData.name);
               localStorage.setItem('role',response.data.userData.role);
-              console.log(response.data);
+              
               setSpinner(false);
               props.onSetIsLoggedIn();
               props.history.push('/meals');

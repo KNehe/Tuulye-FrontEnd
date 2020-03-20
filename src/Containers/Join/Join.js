@@ -131,7 +131,10 @@ const  Join= (props) =>{
          //submit to server
          axios.post('/users/signup',formState)
          .then( response =>{
+            
              localStorage.setItem('authToken',response.data.token);
+             localStorage.setItem('name',response.data.data.user);
+             localStorage.setItem('role',response.data.data.user.role);
              setSpinner(false);
              props.history.push('/meals');
          })

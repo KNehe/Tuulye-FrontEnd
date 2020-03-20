@@ -1,6 +1,6 @@
 
 const initialState = {
-    userName:'Nehemiah',
+    userName:'',
     isLoggedIn: false,
     role:''
 };

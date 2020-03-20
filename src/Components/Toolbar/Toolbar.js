@@ -1,30 +1,63 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Toolbar.css';
 import {withRouter, NavLink} from 'react-router-dom';
 import {connect} from 'react-redux';
+import HumbergerIcon from '../HumbergerIcon/HumbergerIcon';
+import SideDrawer from './../../Containers/SideDrawer/SideDrawer';
+import BackDrop from './../BackDrop/BackDrop';
 
 
 
-const toolbar = (props) =>{
+const Toolbar = (props) =>{
+
+    const [drawerState,setDrawerState] = useState(false);
 
     const loadHome = ()=> {
         props.history.push('/');
+    };
+
+    const  onHumbergerIconClickedHandler = ()=>{
+        setDrawerState(true);
+    };
+
+    const onBackDropClickedHandler = ()=>{
+     setDrawerState(false);
+    };
+
+    const logoutHandler = () =>{
+     localStorage.clear();
+     props.history.push('/');
     };
 
     return (
         <React.Fragment>
 
             <div className="Toolbar">
-                <div className="Title">
+
+                <SideDrawer show={drawerState}/>
+                <BackDrop show={drawerState} clicked={onBackDropClickedHandler}/>
+                
+                <div className="Title"> 
+                    {
+                        props.role == 'admin' && props.isLoggedIn ?
+                      <HumbergerIcon show={true} click={onHumbergerIconClickedHandler}/> : 
+                      <HumbergerIcon show={false} />
+                    }
+
                     <h4 onClick={loadHome}>TUULYE</h4>
                 </div>
+
                 <div className="Navigation">
+                    
                     {props.isLoggedIn?
                     
                     <ul>
                         <li>
-                            <NavLink to='contact' exact activeClassName='activeLink' >{props.name}</NavLink>
+                            <p >{props.name}</p>
                         </li>
+
+                        <li onClick={logoutHandler}><i className='fa fa-sign-out'></i> </li>
+                        
                     </ul>:
 
                     <ul>
@@ -37,6 +70,7 @@ const toolbar = (props) =>{
                         <li>
                             <NavLink to='contact' exact activeClassName='activeLink' >Contact</NavLink>
                         </li>
+                        
                     </ul>
                       }
                 </div>
@@ -49,10 +83,11 @@ const toolbar = (props) =>{
 const mapStateToProps = state =>{
     
     return{
-        name: state.userName,
-        isLoggedIn: state.isLoggedIn
+        name: 'Nehe',
+        isLoggedIn: true,
+        role: 'admin'
     };
 };
 
 
-export default connect(mapStateToProps)(withRouter(toolbar));
+export default connect(mapStateToProps)(withRouter(Toolbar));

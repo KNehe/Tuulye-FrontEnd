@@ -46,6 +46,7 @@ p{
 @media screen and (min-width: 400px){
     .Main{
         max-width: 1200px;
+        height: 77.8vh;
     }
     .Text1,.Text2{
         font-size: 35px;
@@ -115,6 +116,7 @@ p{
 @media screen and (min-width: 1200px){
     .Main{
         max-width: 100%;
+        height: 78.8vh;
     }
     .Text1,.Text2{
         font-size: 60px;

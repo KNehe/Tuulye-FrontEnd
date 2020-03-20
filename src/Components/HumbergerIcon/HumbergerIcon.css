@@ -1,0 +1,12 @@
+.HumbergerIcon{
+    margin-bottom: 10px;
+    margin-left: 50px;
+    margin-top: 10px;
+    margin-right: 10px;
+}
+.HumbergerLine{
+    border-bottom: 2px solid white;
+    height: 10px;
+    width: 50px;
+    padding-bottom: 10px;
+}

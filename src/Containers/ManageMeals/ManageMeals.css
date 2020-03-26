@@ -1,0 +1,97 @@
+.editForm
+{
+ display: flex;
+ flex-direction: column;
+ margin-left: 60px;
+ margin-right: 60px;
+}
+.EditTitle{
+    font-weight: bold;
+    font-size: 2em;
+    margin-bottom: 5px;
+    margin-top: -20px;
+
+    text-align: center;
+}
+.editTextDanger{
+    color: red;
+    margin-bottom: 20px;
+    margin-left: 60px;
+}
+#image{
+ margin-bottom: 20px;
+}
+#name{
+    margin-bottom: 20px;
+  
+}
+#price,#name{
+    padding: 5px 0px 5px 0px;
+    font-size: 15px;
+}
+#editlb1 , #editlb2 , #editlb3 {
+    font-size: 20px !important;
+}
+.editBtnDiv{
+    display: flex;
+    align-self: center;
+}
+
+.DeleteModal{
+    text-align: center;
+    margin-top: 2em;
+    font-weight: bold;
+    font-size: 1.5em;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+}
+.DeleteModalMealName{
+    font-style: italic;
+    font-size: 1.2em;
+    font-weight: bolder;
+    color: rgb(124, 15, 15);
+}
+.deleteBtnDiv{
+    margin-left: 17em;
+}
+
+.AddMealSection{
+    position: absolute;
+    margin-top:100px;
+    border:3px solid brown;
+    border-radius: 50px;
+    width: 50px;
+    height: 30px;
+}
+
+.AddMealLabel{
+    text-align: center;
+    margin-top: -2px;
+    font-size: 2em; 
+    font-weight: bold; 
+    color: brown;
+}
+.AddMealSection:hover{
+    background-color: rgb(165, 42, 42,0.7);
+}
+
+.AddMealLabel:hover{
+    color: white;
+}
+
+.MealsSection{
+    display: grid;
+    max-width: 100%;
+    grid-template-columns: repeat(3,1fr);
+    gap: 5px;
+    padding: 0em 0em 0em 10em;
+    margin-bottom: 5em;
+}
+
+.SearchSection{
+    position: absolute;
+    margin-top:100px;
+    margin-left:1100px;
+
+}
+

@@ -2,7 +2,17 @@
     display: flex;
     flex-direction: column;
     max-width: 360px;
-    padding: 0em 0em 0em 5em;
+    padding: 0em 0em 0em 2em;
+}
+
+.MealHeader{
+   display: flex;
+   flex-direction: column;
+   padding: 0em 0em 0em 2em;
+}
+
+.MealTitle{
+    font-size: 1.2em;
 }
 
 
@@ -17,25 +27,15 @@
         gap:1em;
         padding: 0em 0em 0em 2em;
     }
-
-    .MealHeader{
-        display: grid;
-        grid-template-columns: repeat(12,1fr);
-        padding: 0em 0em 0em 2em;
-    }
-
-    .MealTitle{
-        font-size: 2em;
-        grid-column: 1/10;
-    }
 }
 
-@media screen and (min-width:700px)
-{   
+
+
+@media screen and (min-width:700px){   
     .Meals{
         max-width: 100%;
-        grid-template-columns: repeat(12,1fr);
-        gap:0.2em;
+        grid-template-columns: repeat(3,1fr);
+        gap:0px;
     }
 
     .MealCard{
@@ -45,17 +45,16 @@
     .CardImage img{
       max-width: 200px;
     }
-
-   
-    
-
+    .MealHeader{
+        padding: 0em 0em 0em 2em;
+     }
 }
 
 @media screen and (min-width: 960px){
     .Meals{
         max-width: 100%;
-        grid-template-columns: repeat(12,1fr);
-        gap: 70px;
+        grid-template-columns: repeat(3,1fr);
+        gap: 40px;
         padding: 0em 0em 0em 8em;
     }
     .MealCard{
@@ -69,47 +68,32 @@
     .CardText{
         font-size: 1.5em;
     }
-
-    .MealHeader{
-        display: grid;
-        grid-template-columns: repeat(12,1fr);
-        padding: 0em 0em 0em 8em;
-    }
-
-    .MealTitle{
-        font-size: 2em;
-        grid-column: 1/10;
-    }
 }
 
 @media screen and (min-width:1200px){
     .Meals{
         max-width: 100%;
-        grid-template-columns: repeat(12,1fr);
-        gap: 50px;
+        grid-template-columns: repeat(3,1fr);
+        gap: 10px;
         padding: 0em 0em 0em 10em;
-    }
-    .MealCard{
-        width: 20em;
+        margin-top: -10px;
+        margin-bottom: 5em;
+
     }
     
+    
     .CardImage img{
-      max-width: 350px;
+      max-width: 320px;
     }
     
     .CardText{
         font-size: 1.5em;
     }
-
     .MealHeader{
-        display: grid;
-        grid-template-columns: repeat(12,1fr);
-        margin: 10px 0px 0px 30px;
-    }
-
-    .MealTitle{
-        font-size: 3em;
-        grid-column: 1/10;
-    }
+        padding: 0em 0em 0em 10em;
+     }
+     .MealTitle{
+         font-size: 2em;
+     }
 
 }

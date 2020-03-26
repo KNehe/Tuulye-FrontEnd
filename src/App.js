@@ -10,6 +10,8 @@ import FAQ from './Components/FAQ/FAQ';
 import Contact from './Containers/Contact/Contact';
 import Meals from './Containers/Meals/Meals';
 import ChosenMeal from './Containers/ChosenMeal/ChosenMeal';
+import DashBoard from './Containers/AdminDash/DashBoard';
+import ManageMeals from './Containers/ManageMeals/ManageMeals';
 
 function App() {
   return (
@@ -25,6 +27,8 @@ function App() {
           <Route path='/contact' component={Contact}/>
           <Route path='/meals' component={Meals}/>
           <Route path='/chosenmeal/:id' component={ChosenMeal} />
+          <Route path='/dashboard' component={DashBoard}/>
+          <Route path='/managemeals' component={ManageMeals}/>
         </Switch>
       </Layout>
    </StyleRoot>

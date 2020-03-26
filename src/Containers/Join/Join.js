@@ -3,6 +3,7 @@ import './Join.css';
 import Button from './../../Components/Button/Button';
 import ValidateEmail from './../../Utils/EmailValidation';
 import axios from './../../Axios/axios';
+import {connect} from 'react-redux';
 
 
 
@@ -132,11 +133,24 @@ const  Join= (props) =>{
          axios.post('/users/signup',formState)
          .then( response =>{
             
-             localStorage.setItem('authToken',response.data.token);
-             localStorage.setItem('name',response.data.data.user);
+             localStorage.setItem('token',response.data.token);
+             localStorage.setItem('name',response.data.data.user.name);
              localStorage.setItem('role',response.data.data.user.role);
              setSpinner(false);
-             props.history.push('/meals');
+             
+             if(response.data.data.user.role === 'admin'){
+                props.onSetLoggedIn();
+                props.history.push('/dashboard');
+
+              }else if(response.data.data.user.role === 'user'){
+                props.onSetLoggedIn();
+                props.history.push('/meals');
+
+              }else{
+                localStorage.clear();
+                props.history.push('/');
+              }
+             
          })
          .catch(error =>{
              setErrorMessage('Email already in use!');
@@ -230,4 +244,13 @@ const  Join= (props) =>{
  );
 };
 
-export default Join;
+const mapDispatchToProps = dispatch =>{
+    return{
+        onSetLoggedIn: ()=> dispatch({type:'LOGGED_IN',value:true,
+        name: localStorage.getItem('name'),
+        role: localStorage.getItem('role')
+       })
+    }
+}
+
+export default connect(null,mapDispatchToProps)(Join);

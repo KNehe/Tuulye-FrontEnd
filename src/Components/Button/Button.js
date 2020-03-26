@@ -110,6 +110,61 @@ const button = props =>{
         }
     }
 
+    if(props.buttonClass === 'editBtn'){
+        styles ={
+            backgroundColor: '#FE960E',
+            width:'200px',
+            height:'50px',
+            border:'none',
+            borderRadius:'50px', 
+            fontWeight:'bold',
+            padding:'5px',
+            outline:'none',
+            fontSize:'15px',
+            marginTop:'20px',
+            marginBottom:'20px',
+            color:'white',
+            alignSelf:'center'
+        }
+    }
+
+    if(props.buttonClass === 'cancelBtn'){
+        styles ={
+            backgroundColor: 'black',
+            width:'100px',
+            height:'50px',
+            border:'none',
+            borderRadius:'50px', 
+            fontWeight:'bold',
+            padding:'5px',
+            outline:'none',
+            fontSize:'15px',
+            marginTop:'20px',
+            marginBottom:'20px',
+            marginLeft:'5px',
+            color:'white',
+            alignSelf:'center'
+        }
+    }
+    if(props.buttonClass === 'deleteBtn'){
+        styles ={
+            backgroundColor: 'red',
+            width:'100px',
+            height:'50px',
+            border:'none',
+            borderRadius:'50px', 
+            fontWeight:'bold',
+            padding:'5px',
+            outline:'none',
+            fontSize:'15px',
+            marginTop:'20px',
+            marginBottom:'20px',
+            marginLeft:'5px',
+            color:'white',
+            alignSelf:'center'
+        }
+    }
+
 
  return(
      <button 

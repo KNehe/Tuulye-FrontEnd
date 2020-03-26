@@ -3,25 +3,14 @@ import './Modal.css';
 
 
 const modal = props =>{
-    
-    let cssClass;
 
-    if(props.type === 'error')
-    {
-        cssClass = 'ModalError';
-
-    }else if(props.type === 'message')
-    {
-        cssClass = 'ModalMessage';
-
-    }
 
     return (
     
         <React.Fragment>
 
             <div 
-                className={cssClass}
+                className='Modal'
                 style={ { opacity:props.show? '1': '0', display:props.show? null:'none'}}
             >
              {props.children}

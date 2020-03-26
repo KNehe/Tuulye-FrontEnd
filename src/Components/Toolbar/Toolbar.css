@@ -2,7 +2,7 @@
     display: grid;
     grid-template-columns:repeat(12, 1fr);
     max-width: 340px;
-    gap: 10px;
+    gap: 5px;
     height:20% /*height of screen*/
 
 }
@@ -15,7 +15,7 @@
     text-align: center;
     color:White;
     font-family: Segoe UI;
-    padding: 0px;
+    padding: 0px ;
     font-weight: bold;
     font-size: 20px;
     display: flex;
@@ -53,11 +53,21 @@
    
 }
 
+@media screen and (min-width: 700px){
+    .Title{
+        padding: 0em 0em 0em 3.5em;
+    }
+   
+}
+
 /*tablets and laptops*/
 @media screen and (min-width: 960px){
     .Toolbar{
         max-width: 1200px;
         height:20% /*height of screen*/
+    }
+    .Title{
+        font-size: 20px;
     }
    
 }
@@ -80,6 +90,6 @@ a:hover{
     }
     .Title{
         font-size: 30px;
-        padding: 0px;
+        padding: 0em 0em 0em 3.5em;
     }
 }

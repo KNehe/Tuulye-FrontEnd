@@ -14,7 +14,6 @@ const SignIn = props =>{
     const [errorMessage, setErrorMessage] = useState('');
 
     const [showSpinner,setSpinner] = useState(false);
-
     
     let labelStyle ={
         marginTop:'15px'
@@ -85,13 +84,24 @@ const SignIn = props =>{
           axios.post('/users/login',formState)
           .then( response =>{
               
-              localStorage.setItem('authToken',response.data.token);
+              localStorage.setItem('token',response.data.token);
               localStorage.setItem('name',response.data.userData.name);
               localStorage.setItem('role',response.data.userData.role);
               
               setSpinner(false);
               props.onSetIsLoggedIn();
-              props.history.push('/meals');
+
+              if(response.data.userData.role === 'admin'){
+                props.history.push('/dashboard');
+
+              }else if(response.data.userData.role === 'user'){
+                props.history.push('/meals');
+
+              }else{
+                localStorage.clear();
+                props.history.push('/');
+              }
+              
           })
           .catch(error =>{
               setErrorMessage('Invalid Credentials!!!');
@@ -155,7 +165,10 @@ const SignIn = props =>{
 const mapDispatchToProps = dispatch =>{
 
     return{
-        onSetIsLoggedIn: ()=> dispatch({ type: 'LOGGED_IN', value:true})
+        onSetIsLoggedIn: ()=> dispatch({ type: 'LOGGED_IN', value:true,
+         name: localStorage.getItem('name'),
+        role: localStorage.getItem('role')
+       })
     };
 };
 

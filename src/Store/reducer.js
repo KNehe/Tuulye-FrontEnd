@@ -1,8 +1,9 @@
 
 const initialState = {
-    userName:'',
+    name:'',
     isLoggedIn: false,
-    role:''
+    role:'',
+    showDrawer:false
 };
 
 const reducer = (state = initialState, action) =>{
@@ -11,10 +12,36 @@ const reducer = (state = initialState, action) =>{
 
         return {
             isLoggedIn: action.value,
-            role: localStorage.getItem('role'),
-            userName:localStorage.getItem('name')
+            role: action.role,
+            name:action.name
         }
     }
+
+    if(action.type === 'LOGOUT' ){
+        localStorage.removeItem('name');
+        localStorage.removeItem('token');
+        localStorage.removeItem('role');
+        localStorage.clear();
+        return{
+            isLoggedIn:null,
+            role:null,
+            name:null
+        }
+        
+    }
+
+    if(action.type === 'SHOW_DRAWER'){
+        return{
+            showDrawer: true
+        }
+    }
+
+    if(action.type === 'HIDE_DRAWER'){
+        return{
+            showDrawer: false
+        }
+    }
+
     return state;
 };
 

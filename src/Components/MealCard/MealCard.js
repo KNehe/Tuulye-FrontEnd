@@ -5,9 +5,9 @@ import image  from './../..//Assets/piza.jpg';
 const mealCard = props =>{
     
     return (
-        <div className='MealCard' onClick={props.click}>
+        <div className='MealCard' onClick={props.click} style={{marginTop:"20px"}}>
 
-            <div className='CardImage'>
+            <div className='CardImage' > 
                 <img src={image} alt='Meal'/> 
             </div>
 

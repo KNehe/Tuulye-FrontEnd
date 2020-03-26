@@ -1,0 +1,34 @@
+.DashBoardMain{
+    margin-top:5em;
+    margin-left: 7em;
+    margin-right: 7em;
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    grid-template-rows: repeat(2);
+    gap: 1.5em;
+}
+
+.DashBoardLeft{
+    grid-column: 1/1;
+    grid-row: 1;
+}
+.DashBoardRight{
+    grid-column: 2/3;
+    grid-row: 2;
+
+}
+
+.DashBoardLeft,.DashBoardRight{
+    background-color: rgb(100, 31, 4);
+    border-radius: 15px;
+    color: white;
+    padding: 1.5em;
+    text-align: center;
+    font-size: 2em;
+    font-family: 'Segoe UI';
+}
+
+.StatDigit{
+    font-size: 2.5em;
+    font-weight: bold;
+}

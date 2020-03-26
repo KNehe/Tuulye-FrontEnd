@@ -1,10 +1,10 @@
 import React from 'react';
 import './SideDrawer.css';
-import {withRouter, NavLink} from 'react-router-dom';
+import {NavLink} from 'react-router-dom';
 
 const sideDrawer = props =>{
 
-    const logoutHandler = ()=>{
+    const logoutHandler = ()=> {
      localStorage.clear();
     };
     
@@ -20,11 +20,20 @@ const sideDrawer = props =>{
          
 
                     <ul className='DrawerNavs'>
-                       <li className='DrawerNavItem'>
-                            <NavLink to='' exact activeClassName='activeLink' >
-                            <i className='fa fa-cogs'></i> Settings
+
+                    <li className='DrawerNavItem'>
+                            <NavLink to='managemeals' exact activeClassName='activeLink' >
+                            <i className='fa fa-book'></i> Manage Meals
                             </NavLink>
+                        </li>
+
+                       <li className='DrawerNavItem'>
+                            {/* <NavLink to='*' exact activeClassName='activeLink' >
+                            <i className='fa fa-cogs'></i> Settings
+                            </NavLink> */}
+                            <i className='fa fa-cogs'></i> Settings     
                         </li> 
+
                         <li onClick={logoutHandler} className='DrawerNavItem'>
                             <NavLink to='logout' exact  >
                             <i className='fa fa-sign-out'></i> LogOut 

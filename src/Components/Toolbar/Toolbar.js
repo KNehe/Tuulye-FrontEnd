@@ -5,6 +5,7 @@ import {connect} from 'react-redux';
 import HumbergerIcon from '../HumbergerIcon/HumbergerIcon';
 import SideDrawer from './../../Containers/SideDrawer/SideDrawer';
 import BackDrop from './../BackDrop/BackDrop';
+import Radium from 'radium';
 
 
 
@@ -26,7 +27,17 @@ const Toolbar = (props) =>{
 
     const logoutHandler = () =>{
      localStorage.clear();
+     props.onLoggedOut();
      props.history.push('/');
+    };
+
+    const styles ={
+        '@media (min-width: 360px)':{
+            paddingLeft:'1.3em'
+        },
+        '@media (min-width: 400px)':{
+            paddingLeft:'1.3em'
+        }
     };
 
     return (
@@ -39,12 +50,12 @@ const Toolbar = (props) =>{
                 
                 <div className="Title"> 
                     {
-                        props.role == 'admin' && props.isLoggedIn ?
+                        props.role === 'admin' && props.isLoggedIn ?
                       <HumbergerIcon show={true} click={onHumbergerIconClickedHandler}/> : 
-                      <HumbergerIcon show={false} />
+                       <div style={styles}></div>
                     }
 
-                    <h4 onClick={loadHome}>TUULYE</h4>
+                    <h4 onClick={loadHome} style={{paddingLeft:'5px'}}>TUULYE</h4>
                 </div>
 
                 <div className="Navigation">
@@ -83,11 +94,17 @@ const Toolbar = (props) =>{
 const mapStateToProps = state =>{
     
     return{
-        name: 'Nehe',
-        isLoggedIn: true,
-        role: 'admin'
+        name: state.name,
+        isLoggedIn: state.isLoggedIn,
+        role: state.role
+    };
+};
+
+const mapDispatchToProps = dispatch =>{
+    return{
+      onLoggedOut : ()=> dispatch({ type: 'LOGOUT',value:false})
     };
 };
 
 
-export default connect(mapStateToProps)(withRouter(Toolbar));
+export default connect(mapStateToProps,mapDispatchToProps)(withRouter(Radium(Toolbar)));

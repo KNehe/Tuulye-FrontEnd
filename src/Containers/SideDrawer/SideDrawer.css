@@ -4,7 +4,7 @@
     height: 100vh;
     position: absolute;
     width: 400px;
-    transition: all 0.2s ease-out;
+    transition: all 5s ease-in-out;
     background-color: white; 
 }
 .DrawerHeader{

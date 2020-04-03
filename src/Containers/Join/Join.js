@@ -4,6 +4,7 @@ import Button from './../../Components/Button/Button';
 import ValidateEmail from './../../Utils/EmailValidation';
 import axios from './../../Axios/axios';
 import {connect} from 'react-redux';
+import actions from './../../Store/actions';
 
 
 
@@ -136,6 +137,9 @@ const  Join= (props) =>{
              localStorage.setItem('token',response.data.token);
              localStorage.setItem('name',response.data.data.user.name);
              localStorage.setItem('role',response.data.data.user.role);
+
+             axios.defaults.headers['authorization'] = 'Bearer ' + localStorage.getItem('token');
+             
              setSpinner(false);
              
              if(response.data.data.user.role === 'admin'){
@@ -246,7 +250,7 @@ const  Join= (props) =>{
 
 const mapDispatchToProps = dispatch =>{
     return{
-        onSetLoggedIn: ()=> dispatch({type:'LOGGED_IN',value:true,
+        onSetLoggedIn: ()=> dispatch({type:actions.LOGGED_IN,value:true,
         name: localStorage.getItem('name'),
         role: localStorage.getItem('role')
        })

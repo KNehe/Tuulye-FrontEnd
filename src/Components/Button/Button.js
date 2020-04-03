@@ -165,6 +165,22 @@ const button = props =>{
         }
     }
 
+    if(props.buttonClass === 'Continue'){
+        styles ={
+            backgroundColor: '#FE960E',
+            width:'200px',
+            height:'50px',
+            border:'none',
+            borderRadius:'50px',
+            color:'white',
+            fontWeight:'bold',
+            padding:'5px',
+            outline:'none',
+            fontSize:'15px',
+            marginTop:'25px'
+        }
+    }
+
 
  return(
      <button 

@@ -1,11 +1,24 @@
 import React from 'react';
 import './SideDrawer.css';
-import {NavLink} from 'react-router-dom';
+import {NavLink,withRouter} from 'react-router-dom';
+import {connect} from 'react-redux';
+import actions from './../../Store/actions';
 
 const sideDrawer = props =>{
 
     const logoutHandler = ()=> {
-     localStorage.clear();
+
+     props.onLogOut();
+
+     props.onHide();
+
+     props.history.push('/');
+    };
+
+    const onDrawerNavItemClickedHandler = () =>{
+
+        props.onHide();
+
     };
     
     return(
@@ -21,7 +34,7 @@ const sideDrawer = props =>{
 
                     <ul className='DrawerNavs'>
 
-                    <li className='DrawerNavItem'>
+                    <li className='DrawerNavItem' onClick={onDrawerNavItemClickedHandler} >
                             <NavLink to='managemeals' exact activeClassName='activeLink' >
                             <i className='fa fa-book'></i> Manage Meals
                             </NavLink>
@@ -48,5 +61,14 @@ const sideDrawer = props =>{
 
 };
 
+const mapDispatchToProps = dispatch =>{
+    return{
+      onLogOut : ()=> dispatch({ type: actions.LOGOUT,value:false}),
+      onHide : () => dispatch({ type: actions.HIDE_BACKDROP_DRAWER})
+    };
+};
 
-export default sideDrawer;
+
+
+
+export default connect(null, mapDispatchToProps)(withRouter(sideDrawer)) ;

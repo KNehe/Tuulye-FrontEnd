@@ -4,6 +4,7 @@ import Button from './../../Components/Button/Button';
 import ValidateEmail from './../../Utils/EmailValidation';
 import axios from './../../Axios/axios';
 import {connect} from 'react-redux';
+import actions from './../../Store/actions';
 
 const SignIn = props =>{
    
@@ -87,6 +88,8 @@ const SignIn = props =>{
               localStorage.setItem('token',response.data.token);
               localStorage.setItem('name',response.data.userData.name);
               localStorage.setItem('role',response.data.userData.role);
+
+              axios.defaults.headers['authorization'] = 'Bearer ' + localStorage.getItem('token');
               
               setSpinner(false);
               props.onSetIsLoggedIn();
@@ -165,7 +168,7 @@ const SignIn = props =>{
 const mapDispatchToProps = dispatch =>{
 
     return{
-        onSetIsLoggedIn: ()=> dispatch({ type: 'LOGGED_IN', value:true,
+        onSetIsLoggedIn: ()=> dispatch({ type: actions.LOGGED_IN, value:true,
          name: localStorage.getItem('name'),
         role: localStorage.getItem('role')
        })

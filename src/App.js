@@ -12,27 +12,49 @@ import Meals from './Containers/Meals/Meals';
 import ChosenMeal from './Containers/ChosenMeal/ChosenMeal';
 import DashBoard from './Containers/AdminDash/DashBoard';
 import ManageMeals from './Containers/ManageMeals/ManageMeals';
+import {connect} from 'react-redux';
+import ProtectAdminRoute from './Guard/protectAdminRoute';
+import ProtectUserRoute from './Guard/protectUserRoute';
+import ProtectSignInJoinRoutes from './Guard/protectSignInJoinRoutes';
 
-function App() {
+import NotFound from './Components/NotFound/notfound';
+
+
+const App = props => {
   return (
    <StyleRoot>
       <Layout>
         <Switch>
           <Route path='/' exact component={Landing}/>
           <Route path='/logout'  component={Landing}/>
-          <Route path='/signin' component={SignIn}/>
-          <Route path='/join' component={Join}/>
+
           <Route path='/about' component={About}/>
           <Route path='/faq' component={FAQ}/>
           <Route path='/contact' component={Contact}/>
-          <Route path='/meals' component={Meals}/>
-          <Route path='/chosenmeal/:id' component={ChosenMeal} />
-          <Route path='/dashboard' component={DashBoard}/>
-          <Route path='/managemeals' component={ManageMeals}/>
+
+          <ProtectSignInJoinRoutes exact path='/signin' authStatus={props.isLoggedIn} role={props.role} component={SignIn} />
+          <ProtectSignInJoinRoutes exact path='/join' authStatus={props.isLoggedIn} role={props.role} component={Join} />
+
+          <ProtectUserRoute exact path='/meals' authStatus={props.isLoggedIn} role={props.role} component={Meals} />
+          <ProtectUserRoute exact path='/chosenmeal/:id' authStatus={props.isLoggedIn} role={props.role} component={ChosenMeal} />
+
+          <ProtectAdminRoute exact path='/dashboard' authStatus={props.isLoggedIn} role={props.role} component={DashBoard} />
+          <ProtectAdminRoute exact path='/managemeals' authStatus={props.isLoggedIn} role={props.role} component={ManageMeals} />
+
+          <Route path="*" component ={NotFound}/>
+          
         </Switch>
       </Layout>
    </StyleRoot>
   );
 }
 
-export default App;
+const mapStateToProps = state =>{
+ 
+  return{
+      isLoggedIn: state.auth.isLoggedIn,
+      role: state.auth.role
+  };
+};
+
+export default  connect(mapStateToProps)(App);

@@ -1,14 +1,14 @@
+import actions from './actions';
 
 const initialState = {
     name:'',
     isLoggedIn: false,
-    role:'',
-    showDrawer:false
+    role:''
 };
 
 const reducer = (state = initialState, action) =>{
     
-    if(action.type === 'LOGGED_IN'){
+    if(action.type === actions.LOGGED_IN){
 
         return {
             isLoggedIn: action.value,
@@ -17,30 +17,19 @@ const reducer = (state = initialState, action) =>{
         }
     }
 
-    if(action.type === 'LOGOUT' ){
+    if(action.type === actions.LOGOUT ){
         localStorage.removeItem('name');
         localStorage.removeItem('token');
         localStorage.removeItem('role');
         localStorage.clear();
         return{
-            isLoggedIn:null,
-            role:null,
-            name:null
+            isLoggedIn:false,
+            role:'',
+            name:''
         }
         
     }
 
-    if(action.type === 'SHOW_DRAWER'){
-        return{
-            showDrawer: true
-        }
-    }
-
-    if(action.type === 'HIDE_DRAWER'){
-        return{
-            showDrawer: false
-        }
-    }
 
     return state;
 };

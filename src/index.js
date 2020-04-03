@@ -4,16 +4,37 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import {BrowserRouter} from 'react-router-dom';
 import '../node_modules/font-awesome/css/font-awesome.min.css';
-import { createStore} from 'redux';
-import reducer from './Store/reducer';
+import { createStore,combineReducers} from 'redux';
+import authReducer from './Store/authReducer';
+import drawerBackDropReducer from './Store/drawerBackDropReducer';
 import {Provider} from 'react-redux';
+import storage from 'redux-persist/lib/storage';
+import { PersistGate } from 'redux-persist/integration/react';
+import {persistStore, persistReducer} from 'redux-persist';
 
-const store = createStore(reducer);
+const persistConfig ={
+    key: 'root',
+    storage
+}
+
+const rootReducer = combineReducers({
+    auth: authReducer,
+    drawerBackDrop: drawerBackDropReducer
+});
+
+const persistedReducer = persistReducer(persistConfig,rootReducer);
+
+
+let store = createStore(persistedReducer);
+
+let persistor = persistStore(store);
 
 const app = (
     <Provider store={store}>
         <BrowserRouter>
-            <App/>
+            <PersistGate loading={null} persistor={persistor}>
+                <App/>
+            </PersistGate>
        </BrowserRouter>
     </Provider>
 

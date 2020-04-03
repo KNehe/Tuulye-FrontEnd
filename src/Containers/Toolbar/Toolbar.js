@@ -1,32 +1,33 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './Toolbar.css';
 import {withRouter, NavLink} from 'react-router-dom';
 import {connect} from 'react-redux';
-import HumbergerIcon from '../HumbergerIcon/HumbergerIcon';
-import SideDrawer from './../../Containers/SideDrawer/SideDrawer';
-import BackDrop from './../BackDrop/BackDrop';
+import HumbergerIcon from '../../Components/HumbergerIcon/HumbergerIcon';
+import SideDrawer from '../SideDrawer/SideDrawer';
+import BackDrop from '../../Components/BackDrop/BackDrop';
 import Radium from 'radium';
+import actions from '../../Store/actions';
 
 
 
 const Toolbar = (props) =>{
-
-    const [drawerState,setDrawerState] = useState(false);
 
     const loadHome = ()=> {
         props.history.push('/');
     };
 
     const  onHumbergerIconClickedHandler = ()=>{
-        setDrawerState(true);
+
+        props.onShowDrawer();
+
     };
 
     const onBackDropClickedHandler = ()=>{
-     setDrawerState(false);
+     
+        props.onHide();
     };
 
     const logoutHandler = () =>{
-     localStorage.clear();
      props.onLoggedOut();
      props.history.push('/');
     };
@@ -45,8 +46,8 @@ const Toolbar = (props) =>{
 
             <div className="Toolbar">
 
-                <SideDrawer show={drawerState}/>
-                <BackDrop show={drawerState} clicked={onBackDropClickedHandler}/>
+                <SideDrawer show={props.showDraw}/>
+                <BackDrop show={props.showBack} clicked={onBackDropClickedHandler}/>
                 
                 <div className="Title"> 
                     {
@@ -92,19 +93,25 @@ const Toolbar = (props) =>{
 };
 
 const mapStateToProps = state =>{
-    
     return{
-        name: state.name,
-        isLoggedIn: state.isLoggedIn,
-        role: state.role
+        name: state.auth.name,
+        isLoggedIn: state.auth.isLoggedIn,
+        role: state.auth.role,
+        showDraw: state.drawerBackDrop.showDrawer,
+        showBack: state.drawerBackDrop.showBackDrop
     };
 };
 
 const mapDispatchToProps = dispatch =>{
+    
     return{
-      onLoggedOut : ()=> dispatch({ type: 'LOGOUT',value:false})
+      onLoggedOut : ()=> dispatch({ type: actions.LOGOUT,value:false}),
+      onShowDrawer : ()=> dispatch({ type: actions.SHOW_DRAWER}),
+      onHide : () => dispatch({ type: actions.HIDE_BACKDROP_DRAWER})
     };
 };
+
+
 
 
 export default connect(mapStateToProps,mapDispatchToProps)(withRouter(Radium(Toolbar)));

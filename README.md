@@ -1,3 +1,7 @@
+[![Build Status](https://travis-ci.org/KNehe/Tuulye-FrontEnd.svg?branch=ReactJS-Client)](https://travis-ci.org/KNehe/Tuulye-FrontEnd)
+
+[![Coverage Status](https://coveralls.io/repos/github/KNehe/Tuulye-FrontEnd/badge.svg?branch=ReactJS-Client)](https://coveralls.io/github/KNehe/Tuulye-FrontEnd?branch=ReactJS-Client)
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts

@@ -15,6 +15,32 @@
     font-size: 1.2em;
 }
 
+.PaginationLinkNormal{   
+    border: 3px solid #F34B0B;
+    padding: 12px;
+    border-radius: 10px;
+    color: #F34B0B;    
+    opacity: 0.8;
+}
+
+.PaginationLinkActive{
+    background-color: #F34B0B;
+    padding: 15px;
+    color: #ffffff;
+}
+
+.PaginationLinkActive,.PaginationLinkNormal{
+    margin: 3px;
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.PaginationList{
+    list-style-type: none;
+    display: flex;
+}
+
 
 
 
@@ -48,6 +74,9 @@
     .MealHeader{
         padding: 0em 0em 0em 2em;
      }
+     .PaginationDiv{
+        padding: 0em 0em 0em 5em;
+    }
 }
 
 @media screen and (min-width: 960px){
@@ -67,6 +96,9 @@
     
     .CardText{
         font-size: 1.5em;
+    }
+    .PaginationDiv{
+        padding: 0em 0em 0em 8em;
     }
 }
 

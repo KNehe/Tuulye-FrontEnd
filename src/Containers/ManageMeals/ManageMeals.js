@@ -29,16 +29,20 @@ const ManageMeals = props =>{
 
     const [spinner,setSpinner] = useState(false);
 
+    const [pagination, setPagination] = useState({size:3,page:1});
+    const[numberOfPages, setNumberOfPages] = useState({number:1});
+
     useEffect( ()=>{
 
-        axios.get('/meals/').then( result =>{
+        axios.get(`/meals/${pagination.size}/${pagination.page}`).then( result =>{
             setMealsState(result.data.data.meals);
+            setNumberOfPages(result.data.data.pages);
         })
         .catch(err=>{
            console.log("Meals.js Error",err);
         });
 
-    },[notification]);
+    },[notification,pagination.page,pagination.size]);
 
     const onBtnCancelClickedHandler = event =>{
         event.preventDefault();
@@ -282,6 +286,14 @@ const ManageMeals = props =>{
        
     };
 
+    const onPaginationLinkClickedHandler = (event,page)=>{
+
+        event.preventDefault();
+        setPagination({page:page,size:3});
+  
+      };
+  
+
 
     const meals = mealList.map( meal=>
 
@@ -294,7 +306,24 @@ const ManageMeals = props =>{
             trashClicked={ (event) => trashClickedHandler(event,meal) }
            
         />
+
     );
+
+    const paginationLinks = [];
+
+    for(let i = 1; i <= numberOfPages; i ++){
+
+        const link = <li 
+                        className={pagination.page === i ? 'PaginationLinkActive' : 'PaginationLinkNormal'} 
+                        key={i}
+                        onClick={ (event)=> onPaginationLinkClickedHandler(event,i) }>
+                            {i}
+                      </li>;
+  
+        paginationLinks.push(link); 
+  
+      }
+    
 
   return (
        <React.Fragment>
@@ -463,8 +492,10 @@ const ManageMeals = props =>{
        </Modal>   
        
         <div className='MealHeader'>
+            
             <h4 className='MealTitle'>Manage Meals</h4>
-
+            
+            {/* Add a meal button */}
             <div className='AddMealSection' onClick={onAddMealSectionClickedHandler}>
 
                 <div className='AddMealLabel'>
@@ -472,7 +503,8 @@ const ManageMeals = props =>{
                 </div>
 
             </div>
-
+            
+            {/* Search input field */}
             <div className='SearchSection'>
                 <input 
                         type='text' 
@@ -485,8 +517,19 @@ const ManageMeals = props =>{
 
         </div>
         
+        {/* the list of meals */}
         <div className='MealsSection'>
              {noResult? '' : meals}
+        </div>
+
+        {/* pagination */}
+        <div className='PaginationDiv'>
+            <ul className='PaginationList'>
+
+               { mealList.length > 1 & !noResult ? paginationLinks : '' }
+            
+            </ul>
+        
         </div>
 
     </React.Fragment>

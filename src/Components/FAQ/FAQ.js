@@ -11,11 +11,11 @@ const faq = props =>{
                     <span className='answer'> We shall contact you</span>
                 </h4>
 
-                <h4>  When do I pay for a meal ? <br /> 
+                <h4 data-testid='When'>  When do I pay for a meal ? <br /> 
                     <span className='answer'> When you choose a meal of interest</span>
                 </h4>
 
-                <h4>  Do you provide all kinds of meals ?  <br /> 
+                <h4 data-testid='Do'>  Do you provide all kinds of meals ?  <br /> 
                     <span className='answer'> We only give what we have prepared</span>
                 </h4>
                 

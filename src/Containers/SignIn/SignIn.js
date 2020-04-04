@@ -143,6 +143,7 @@ const SignIn = props =>{
 
                     <div className='SignBtnHolder'>
                         <Button 
+                          className='SignInScreenBtn'
                            buttonClass='SignInScreenBtn'
                            type='Submit'
                         >

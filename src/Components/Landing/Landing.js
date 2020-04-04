@@ -37,7 +37,7 @@ const loadAppropiatePage = () =>{
 
              <React.Fragment>
 
-                 <Button buttonClass="Continue" click={loadAppropiatePage}>Continue</Button>
+                 <Button buttonClass="Continue"  className="btnContinue"click={loadAppropiatePage}>Continue</Button>
 
              </React.Fragment>
             :
@@ -45,7 +45,7 @@ const loadAppropiatePage = () =>{
              <React.Fragment>
                  
                  <Button buttonClass="SignIn" className="Btn" click={loadSignInPage}>SIGN IN</Button>
-                 <Button buttonClass="Join" click={loadJoinPage}>JOIN</Button>
+                 <Button buttonClass="Join"className="BtnJoin"  click={loadJoinPage}>JOIN</Button>
 
              </React.Fragment>
             }

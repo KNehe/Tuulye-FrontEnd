@@ -7,6 +7,7 @@
     "@testing-library/user-event": "^7.2.1",
     "axios": "^0.19.2",
     "babel-core": "^6.26.3",
+    "firebase": "^7.13.2",
     "font-awesome": "^4.7.0",
     "radium": "^0.26.0",
     "react": "^16.13.0",
@@ -22,8 +23,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "jest ",
-    "test:watch": "npm test -- --watch",
-    "test:coverage":"jest --coverage",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {

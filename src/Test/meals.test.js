@@ -7,6 +7,10 @@ import { Provider } from 'react-redux';
 import { createMemoryHistory } from 'history';
 import {cleanup} from '@testing-library/react';
 import Meals from './../Containers/Meals/Meals';
+import axios  from 'axios';
+import MockAdapter from 'axios-mock-adapter';
+
+
 
 
 Enzyme.configure({ adapter: new Adapter() });
@@ -21,16 +25,14 @@ let store;
 
 const initialState = {
     auth:{
-        isLoggedIn:false,
-        role:''
+        isLoggedIn:true,
+        role:'user'
     },
     
 };
+
 const history = createMemoryHistory();
 history.push('/meals');
-
-let mealList;
-
 
 
 beforeEach(()=>{
@@ -39,34 +41,47 @@ beforeEach(()=>{
    
     wrapper = mount( <Provider store={store} >
                         <StyleRoot> 
-                          <Meals history={history} mealList={mealList}/> 
+                          <Meals history={history}/> 
                         </StyleRoot> 
                      </Provider>
                     );
 });
 
-afterEach(()=>{
-    jest.clearAllMocks();
-});
+// afterEach(()=>{
+//     jest.clearAllMocks();
+// });
+
+
 
 describe('Meal.js tests',()=>{
 
     it ('Should not render meals',()=>{ 
-    
+      
+      axios.defaults.headers['authorization'] = 'Bearer JWT1111';
+      const mockAdapter = new MockAdapter(axios);
+         
+      mockAdapter.onGet('/meals/1/1').reply(200,{data:'mydata'});
+
+        setImmediate(()=>{
+          
+        });
+
+       
+
          expect(wrapper.find('.MealCard').length).toEqual(0);
 
     });
 
-    it('Should trigger search input and not return results ',()=>{
+    // it('Should trigger search input and not return results ',()=>{
 
 
-        wrapper.find('input[type="text"]').simulate('change', {
-            target: {
-              value: 'fkdkfdkfdkfk',
-            },
-          });
+    //     wrapper.find('input[type="text"]').simulate('change', {
+    //         target: {
+    //           value: 'fkdkfdkfdkfk',
+    //         },
+    //       });
 
-        expect(wrapper.find('.userSearch').text()).toBe('');
-    });
+    //     expect(wrapper.find('.userSearch').text()).toBe('');
+    // });
 
 });

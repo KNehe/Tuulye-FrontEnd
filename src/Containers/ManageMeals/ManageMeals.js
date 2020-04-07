@@ -6,6 +6,7 @@ import BackDrop from './../../Components/BackDrop/BackDrop';
 import Button from './../../Components/Button/Button';
 import './ManageMeals.css';
 import Notification from '../../Components/Notification/Notification';
+import storage from './../../Firebase/firebase';
 
 const ManageMeals = props =>{
 
@@ -23,6 +24,8 @@ const ManageMeals = props =>{
     //meal for adding
     const [meal,setMeal] = useState({name:'',price:'',image:''});
     
+    const [imageFile,setImageFile]= useState({});
+    
     const [errorMessage,setErrorMessage] = useState('');
 
     const [notification, setNotification] = useState({type:'',show:false, message:''});
@@ -32,17 +35,27 @@ const ManageMeals = props =>{
     const [pagination, setPagination] = useState({size:3,page:1});
     const[numberOfPages, setNumberOfPages] = useState({number:1});
 
+       //used to track if user has cleared search box
+    //and cause useEffect to run again
+    const[isSearchEmpty, setIsSearchEmpty] = useState(false);
+
+    
+    //used to determine whether to show pagination or not
+    //if true then no need to paginate
+    const [searchValue,setSearchValue] =useState(true);
+
     useEffect( ()=>{
 
         axios.get(`/meals/${pagination.size}/${pagination.page}`).then( result =>{
             setMealsState(result.data.data.meals);
             setNumberOfPages(result.data.data.pages);
+            setIsSearchEmpty(false);
         })
         .catch(err=>{
            console.log("Meals.js Error",err);
         });
 
-    },[notification,pagination.page,pagination.size]);
+    },[notification,pagination.page,pagination.size,isSearchEmpty]);
 
     const onBtnCancelClickedHandler = event =>{
         event.preventDefault();
@@ -51,6 +64,7 @@ const ManageMeals = props =>{
         setDeleteModal(false);
         setBackDrop(false);
         setShowAddMealModal(false);
+        setSpinner(false);
 
     };
 
@@ -91,7 +105,9 @@ const ManageMeals = props =>{
          setChosenMeal({name:clonedState.name, price:inputValue, image:clonedState.image, _id:clonedState._id});
      }
      if(inputName === 'image'){
-        setChosenMeal({name:clonedState.name, price:clonedState.price, image:inputValue, _id:clonedState._id});
+
+         const imageFile = event.target.files[0];
+         setImageFile(imageFile);
          
     }
     if(inputName === 'name'){
@@ -104,38 +120,95 @@ const ManageMeals = props =>{
     const onEditFormSubmittedHandler = event =>{
 
         event.preventDefault();
-        if(chosenMeal.price.toString().trim() === '' || chosenMeal.name.toString().trim() === '' || chosenMeal.image.trim() === ''){
+
+        if(chosenMeal.price.toString().trim() === '' || chosenMeal.name.toString().trim() === '' || chosenMeal.image === ''){
           return setErrorMessage('No changes to be made');
 
         }else{
 
             setErrorMessage('');
             setSpinner(true);
+
+            if(imageFile != null ){
+
+                uploadImage().then((url)=>{
+                 
+                    const updatedMeal = {
+                        _id: chosenMeal._id,
+                        name: chosenMeal.name,
+                        price: chosenMeal.price,
+                        image: url 
+                    }
+    
+                    axios.patch(`/meals/${chosenMeal._id}`,updatedMeal)
+                .then((result)=>{
+    
+                    setSpinner(false);
+                    setNotification({show:true, type:'success', message: 'Changes saved successsfully !'});
+    
+                    return setTimeout(()=>{
+                        setNotification({show:false});
+                        setBackDrop(false);
+                        setEditModal(false);
+                    },4000);
+                })
+                .catch((error)=>{
+                //    console.log(error);
+                   setSpinner(false);
+                   setErrorMessage('An error occurred !'); 
+    
+                   setNotification({show:true ,type:'danger',message: 'An error occurred !' });
+    
+                    setTimeout(()=>{
+                        setNotification({show:false});
+                    },3000);
+    
+                });
+    
+                }).catch(()=>{
+    
+                    setSpinner(false);
+                    setErrorMessage('An error occurred !'); 
+     
+                    setNotification({show:true ,type:'danger',message: 'An error occurred !' });
+     
+                    setTimeout(()=>{
+                        setNotification({show:false});
+                    },3000);
+                });
+
+            }else{
+
+                axios.patch(`/meals/${chosenMeal._id}`,chosenMeal)
+                .then((result)=>{
+    
+                    setSpinner(false);
+                    setNotification({show:true, type:'success', message: 'Changes saved successsfully !'});
+    
+                    return setTimeout(()=>{
+                        setNotification({show:false});
+                        setBackDrop(false);
+                        setEditModal(false);
+                    },4000);
+                })
+                .catch((error)=>{
+                //    console.log(error);
+                   setSpinner(false);
+                   setErrorMessage('An error occurred !'); 
+    
+                   setNotification({show:true ,type:'danger',message: 'An error occurred !' });
+    
+                    setTimeout(()=>{
+                        setNotification({show:false});
+                    },3000);
+    
+                });
+
+            }
+
+            
            
-            axios.patch(`/meals/${chosenMeal._id}`,chosenMeal)
-            .then((result)=>{
-
-                setSpinner(false);
-                setNotification({show:true, type:'success', message: 'Changes saved successsfully !'});
-
-                return setTimeout(()=>{
-                    setNotification({show:false});
-                    setBackDrop(false);
-                    setEditModal(false);
-                },4000);
-            })
-            .catch((error)=>{
-               console.log(error);
-               setSpinner(false);
-               setErrorMessage('An error occurred !'); 
-
-               setNotification({show:true ,type:'danger',message: 'An error occurred !' });
-
-            setTimeout(()=>{
-                setNotification({show:false});
-            },3000);
-
-            });
+            
 
         }
     };
@@ -195,8 +268,9 @@ const ManageMeals = props =>{
         }
 
         if(inputName === 'image'){
-           setMeal({name:clonedState.name, price:clonedState.price, image:inputValue});
-            
+
+            const image = event.target.files[0];
+            setImageFile(image);
        }
 
        if(inputName === 'name'){
@@ -206,11 +280,55 @@ const ManageMeals = props =>{
 
     };
 
-    const onAddFormSubmittedHandler = event => {
+    const uploadImage = () => {
+       
+        return new Promise( (resolve,reject)=>{
 
-        event.preventDefault();
+            const uploadTask = storage.ref(`images/${imageFile.name}`).put(imageFile);
+
+            uploadTask.on(
+                "state_changed",
+                snapshot => {
+                  console.log('snapshot ....',snapshot);
+                },
+                error => {
+                  // Error function ...
+                  setSpinner(false);
+                  setErrorMessage('An error occurred ! Try again!');
+      
+                  setNotification({show:true,type:'danger', message:'Image upload failed Try again!'});
+                  console.log(error);
+                  return setTimeout(()=>{
+                      setNotification({show:false});
+                      setShowAddMealModal(false);
+                      setBackDrop(false);
+                  },4000);
+                 
+                },
+                () => {
+                  // complete function ...
+                  storage
+                    .ref("images")
+                    .child(imageFile.name)
+                    .getDownloadURL()
+                    .then(url => {
+                        url ? resolve(url) : reject();
+                    });
+                }
+              );
+
+        });
+
         
-        if(meal.image.trim() === '' || meal.name.trim() === '' || meal.price.trim() === ''){
+
+     
+      };
+
+      const onAddFormSubmittedHandler = (event) => { 
+        
+        event.preventDefault();
+
+        if(imageFile === '' || meal.name.trim() === '' || meal.price.trim() === ''){
             return setErrorMessage('All fields are required');
 
         }else{
@@ -218,34 +336,56 @@ const ManageMeals = props =>{
             setErrorMessage('');
             setSpinner(true);
 
-            axios.post('/meals/',meal)
-            .then((result)=>{
-                
-                setSpinner(false);
-                setNotification({type:'success',show:true, message: `${result.data.data.meal.name} : Added successfully !`});
+            uploadImage().then( (url) =>{
+                 
+                const newMeal = {
+                    name: meal.name,
+                    price:meal.price,
+                    image: url
+                }
+                axios.post('/meals',newMeal)
+                .then((result)=>{
+                    
+                    setSpinner(false);
+                    setNotification({type:'success',show:true, message: `${result.data.data.meal.name} : Added successfully !`});
+    
+                    return setTimeout(()=>{
+                        setNotification({show:false});
+                        setShowAddMealModal(false);
+                        setBackDrop(false);
+                    },4000);
+    
+                })
+                .catch((error)=>{
+                    
+                    setSpinner(false);
+                    setErrorMessage('An error occurred ! Try again!');
+    
+                    setNotification({show:true,type:'danger', message:'An error occurred !'});
+    
+                    return setTimeout(()=>{
+                        setNotification({show:false});
+                        setShowAddMealModal(false);
+                        setBackDrop(false);
+                    },4000);
+    
+                });
+    
 
-                return setTimeout(()=>{
-                    setNotification({show:false});
-                    setShowAddMealModal(false);
-                    setBackDrop(false);
-                },4000);
-
-            })
-            .catch((error)=>{
-                
+            }).catch( ()=>{
                 setSpinner(false);
                 setErrorMessage('An error occurred ! Try again!');
-
-                setNotification({show:true,type:'danger', message:'An error occurred !'});
-
+    
+                setNotification({show:true,type:'danger', message:'Image upload failed Try again! 2'});
+                
                 return setTimeout(()=>{
                     setNotification({show:false});
                     setShowAddMealModal(false);
                     setBackDrop(false);
                 },4000);
-
             });
 
+         
 
         }
 
@@ -258,7 +398,15 @@ const ManageMeals = props =>{
         const query = {'name':inputValue};
 
         if(inputValue.trim() === ''){
-         setNoResult('');
+
+          setNoResult('');
+
+          //search is empty
+          //to fire useEffect
+          setIsSearchEmpty(true);
+
+          //to allow pagination
+          setSearchValue(true);
         }
         
         if(inputValue.trim() !== ''){
@@ -267,6 +415,10 @@ const ManageMeals = props =>{
             .then((result)=>{
               if(result.data.data.result === 'No results found')
               {
+
+             //to remove pagination
+              setSearchValue(false);
+
               return setNoResult(
                                 <div
                                    style={{textAlign:'center',marginTop:'10px', fontWeight:"bold"}}>
@@ -274,10 +426,17 @@ const ManageMeals = props =>{
                                 </div>
                                 );
               }
+
+              //to remove pagination
+              setSearchValue(false);
+              //remove no result message
               setNoResult('');
               setMealsState(result.data.data.result) 
             })
             .catch((error)=>{
+                setNoResult('');
+                //to remove pagination
+                setSearchValue(false);
                 console.log('search error: ', error);
             })
 
@@ -526,7 +685,7 @@ const ManageMeals = props =>{
         <div className='PaginationDiv'>
             <ul className='PaginationList'>
 
-               { mealList.length > 1 & !noResult ? paginationLinks : '' }
+               { !noResult && searchValue ? paginationLinks : '' }
             
             </ul>
         

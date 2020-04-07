@@ -20,6 +20,10 @@ const sideDrawer = props =>{
         props.onHide();
 
     };
+    //for non-implementated parts
+    const clickHandler = ()=>{
+        alert('Sorry section under maintenance !');
+    }
     
     return(
         
@@ -40,10 +44,11 @@ const sideDrawer = props =>{
                             </NavLink>
                         </li>
 
-                       <li className='DrawerNavItem'>
-                            {/* <NavLink to='*' exact activeClassName='activeLink' >
-                            <i className='fa fa-cogs'></i> Settings
-                            </NavLink> */}
+                       <li className='DrawerNavItem' onClick={clickHandler}>
+                            <i className='fa fa-book'></i> Orders     
+                        </li> 
+
+                        <li className='DrawerNavItem' onClick={clickHandler}>
                             <i className='fa fa-cogs'></i> Settings     
                         </li> 
 

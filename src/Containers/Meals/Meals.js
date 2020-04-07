@@ -11,19 +11,29 @@ const Meals = props =>{
     const [pagination, setPagination] = useState({size:3,page:1});
     const[numberOfPages, setNumberOfPages] = useState({number:1});
     
-    
+    //used to track if user has cleared search box
+    //and cause useEffect to run again
+    const[isSearchEmpty, setIsSearchEmpty] = useState(false);
 
+    //used to determine whether to show pagination or not
+    //if true then no need to paginate
+    const [searchValue,setSearchValue] =useState(true);
+    
+    
+   
     useEffect( ()=>{
         
         axios.get(`/meals/${pagination.size}/${pagination.page}`).then( result =>{
             setMealsState(result.data.data.meals);
             setNumberOfPages(result.data.data.pages);
+            setIsSearchEmpty(false);
         })
         .catch(err=>{
            console.log("Meals.js Error",err);
         });
+      
 
-    },[pagination.page,pagination.size]);
+    },[pagination.page,pagination.size,isSearchEmpty]);
     
     const onMealSelectedHandler = (mealId)=>{
 
@@ -41,7 +51,15 @@ const Meals = props =>{
         const query = {'name':inputValue};
 
         if(inputValue.trim() === ''){
+
          setNoResult('');
+         
+         //search is empty
+         //to fire useEffect
+         setIsSearchEmpty(true);
+         
+         //to allow pagination
+         setSearchValue(true);
         }
         
         if(inputValue.trim() !== ''){
@@ -51,6 +69,9 @@ const Meals = props =>{
 
               if(result.data.data.result === 'No results found'){
 
+              //to remove pagination
+              setSearchValue(false);
+
               return setNoResult(
                                 <div
                                    style={{marginTop:'10px', fontWeight:"bold"}}>
@@ -59,13 +80,20 @@ const Meals = props =>{
                                 );
               }
               
-          
+              //remove no result message
               setNoResult('');
+
+              //to remove pagination
+              setSearchValue(false);
+
+              //set records
               setMealsState(result.data.data.result);
 
             })
             .catch((error)=>{
                 setNoResult('');
+                //to remove pagination
+                setSearchValue(false);
                 console.log('search error: ', error);
             })
 
@@ -133,7 +161,7 @@ return(
         <div className='PaginationDiv'>
             <ul className='PaginationList'>
 
-               { mealList.length > 1 & !noResult ? paginationLinks : '' }
+               { !noResult && searchValue ? paginationLinks : '' }
             
             </ul>
         

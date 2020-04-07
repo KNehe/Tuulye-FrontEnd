@@ -1,6 +1,6 @@
 import React from 'react';
 import './MealCard.css';
-import image  from './../..//Assets/piza.jpg';
+// import image  from './../..//Assets/piza.jpg';
 
 const mealCard = props =>{
     
@@ -8,7 +8,7 @@ const mealCard = props =>{
         <div className='MealCard' onClick={props.click} style={{marginTop:"20px"}}>
 
             <div className='CardImage' > 
-                <img src={image} alt='Meal'/> 
+                <img src={props.image} alt='Meal'/> 
             </div>
 
             <div className='CardText'>

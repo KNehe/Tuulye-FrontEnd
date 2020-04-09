@@ -2,6 +2,8 @@ import React , {useState} from 'react';
 import './Contact.css';
 import Button from './../../Components/Button/Button';
 import ValidateEmail from './../../Utils/EmailValidation';
+import axios from './../../Axios/axios';
+import Notification from './../../Components/Notification/Notification';
 
 
 const Contact = props =>{
@@ -13,6 +15,10 @@ const Contact = props =>{
     const [errorMessage, setErrorMessage] = useState('');
 
     const [showSpinner, setSpinner] = useState(false);
+
+    const [notification, setNotification] = useState({type:'',show:false, message:''});
+
+    const [formRef,setFormRef] = useState({});
 
     //saving  form data in state
     const onInputChangedHanlder = (event, inputName) =>{
@@ -35,7 +41,12 @@ const Contact = props =>{
     //validation and submission to server
     const onFormSubmittedHandler = event =>{
         event.preventDefault();
-        
+
+        if(formRef.email.value.trim() === '' || formRef.teaxtArea.value.trim() === ''){
+            setInputErrorClasses({ emailErrorClass:'invalidField', messageErrorClass:'invalidFieldTextArea'})
+            return setErrorMessage('All fields are required');
+        }
+
         if(formState.email.trim() === '' && formState.message.trim() === '')
         {
             setInputErrorClasses({ emailErrorClass:'invalidField', messageErrorClass:'invalidFieldTextArea'})
@@ -66,22 +77,57 @@ const Contact = props =>{
             return setErrorMessage('Atleast 15 characters required');   
         }
 
-         //clear fields
+         //clear errors
          setInputErrorClasses('');
          setErrorMessage('');
 
          setSpinner(true);
 
-         //submit to server
-        //  console.log(formState);
+         axios.post('/users/contactus',formState)
+         .then( response =>{
+            
+            setSpinner(false);
+            setNotification({type:'success',show:true, message:''});
+
+            formRef.reset();  
+
+           return setTimeout(()=>{
+                setNotification({show:false});   
+            },5000);
+            
+             
+         })
+
+         .catch(error=>{
+
+            setSpinner(false);
+            setNotification({type:'danger',show:true, message:'An error occured ! Try again'});
+
+            formRef.reset();
+            
+           return setTimeout(()=>{
+                setNotification({show:false}); 
+            },5000);
+            
+
+        })
+            
+        
     };
 
     return (
+       
+        <React.Fragment>
+
+        <Notification show={notification.show} type={notification.type} message={notification.message}>
+            <p style={{ padding:'2em', fontWeight: 'bold'}}>We have received your message!</p>
+       </Notification>
+       
         <div className='ContactMain'>
 
             <div className='ContactLeft'>
 
-                <form onSubmit={onFormSubmittedHandler}>
+                <form onSubmit={onFormSubmittedHandler} ref={ (el) => setFormRef(el) } >
                     <label className='textDanger'>{errorMessage}</label>
                     <label htmlFor='contactEmail' className='ContactLabel1'>Email</label>
                     <input 
@@ -120,6 +166,7 @@ const Contact = props =>{
             <div className='ContactRight'></div>
 
         </div>
+        </React.Fragment>
     );
 };
 

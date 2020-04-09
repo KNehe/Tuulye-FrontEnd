@@ -188,31 +188,6 @@ describe('SignIn.js', ()=>{
           expect( wrapper.find('.textDanger').text() ).toBe('Invalid Email');
 
       });
-
-
-      it('Should return error password is invalid', () => {
-
-
-        wrapper.find('input[type="email"]').simulate('change', {
-          target: {
-            value: 'k@gmail.com',
-          },
-        });
-
-
-        wrapper.find('input[type="password"]').simulate('change', {
-            target: {
-              value: '12',
-            },
-          });
-
-          const form = wrapper.find('form');
-
-          form.simulate('submit');
-
-          expect( wrapper.find('.textDanger').text() ).toBe('Password Must be atleast 6 characters');
-
-      });
       
 
 

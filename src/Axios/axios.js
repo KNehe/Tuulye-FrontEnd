@@ -1,7 +1,10 @@
 import axios from 'axios';
 
+const baseOnlineUrl = 'https://tuulye.herokuapp.com/';
+const baseLocalUrl = 'http://127.0.0.1:3000/api/v1/';
+
 const instance = axios.create({
-    baseURL: 'http://127.0.0.1:3000/api/v1/'
+    baseURL: baseLocalUrl
 });
 
 instance.defaults.headers['authorization'] = 'Bearer ' + localStorage.getItem('token');
@@ -16,11 +19,16 @@ error=>{
 });
 
 instance.interceptors.response.use( response=>{
-    // console.log("RESPONSE",response);
+    // console.log("RESPONSE ..",response);
     return response;
 },
 error=>{
-    // console.log("error",error);
+    // console.log("error config",error);
+
+    if(error.message === 'Network Error'){
+     alert('No connection to server !!!');
+    }
+    
     return Promise.reject(error);
 });
 

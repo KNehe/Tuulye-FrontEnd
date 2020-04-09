@@ -154,7 +154,16 @@ return(
         
         {/* list of meals */}
         <div className='Meals'>
+            {meals.length === 0 ? 
+            
+                <div style={{ marginTop: '50px', textAlign:"center", fontSize:'20px'}}>
+                    <p>Loading meals... <i className='fa fa-spinner fa-spin'></i></p> 
+                </div> :
+
+             ''}
+
             {noResult? '' : meals}
+            
         </div>
         
         {/* pagination */}

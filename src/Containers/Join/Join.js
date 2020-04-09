@@ -22,6 +22,10 @@ const  Join= (props) =>{
 
     const [showSpinner,setSpinner] = useState(false);
 
+    const [radioValue, setRadioValue]= useState('male');
+
+    const [formRef, setFormRef] = useState({});
+
 
     const loadSignInPage = ()=>{
         props.history.push('/signin');
@@ -64,7 +68,7 @@ const  Join= (props) =>{
         event.preventDefault();
         
         if(formState.name.trim() === '' && formState.email.trim() === '' && formState.phone.trim() === '' 
-           && formState.gender.trim() === '' && formState.password.trim() === '')
+           && formState.password.trim() === '')
         {
             setInputErrorClasses({ nameErrorClass:'invalidField',
                                     emailErrorClass:'invalidField',
@@ -118,20 +122,24 @@ const  Join= (props) =>{
             return setErrorMessage('Password Must be atleast 6 characters');   
         }
 
-        if(formState.gender.trim() === '')
-        {
-            setInputErrorClasses({ genderErrorClass:'invalidField'})
-            return setErrorMessage('Gender is required');  
-        }
-
          //clear fields
          setInputErrorClasses('');
          setErrorMessage('');
 
          setSpinner(true);
+         
+         const data = {
+            name: formState.name,
+            email: formState.email,
+            phone: formState.phone,
+            password: formState.password,
+            gender : radioValue
+         }
+
+        
 
          //submit to server
-         axios.post('/users/signup',formState)
+         axios.post('/users/signup',data)
          .then( response =>{
             
              localStorage.setItem('token',response.data.token);
@@ -142,6 +150,8 @@ const  Join= (props) =>{
              
              setSpinner(false);
              
+             formRef.reset();
+
              if(response.data.data.user.role === 'admin'){
                 props.onSetLoggedIn();
                 props.history.push('/dashboard');
@@ -152,23 +162,54 @@ const  Join= (props) =>{
 
               }else{
                 localStorage.clear();
-                props.history.push('/');
+                props.history.push('/join');
               }
              
          })
          .catch(error =>{
-             setErrorMessage('Email already in use!');
-             setSpinner(false);
-             console.log("JOIN ERROR", error);
+             
+            setSpinner(false);
+            formRef.reset();
+
+            console.log("JOIN ERROR", error.response);
+            
+            if(error.message === 'Network Error'){
+
+                return setErrorMessage(`Network error !`);
+
+             }
+
+            const erorrCode  = error.response.data.err.code;
+
+            if( erorrCode === 11000){
+
+                setErrorMessage(`Email already in use !`);
+
+             }
+             else{
+
+                setErrorMessage(`An error occurred !`);
+             }
+             
+             
+            
+           
          });
 
     };
+
+     const radioButtonClickedHandler = event =>{
+         
+        const radioButtonValue = event.target.value;
+        setRadioValue(radioButtonValue);       
+         
+     };
 
  return (
      <div className='JoinMain'>
 
          <section className='JoinLeft'>
-                <form onSubmit={onFormSubmittedHandler}>
+                <form onSubmit={onFormSubmittedHandler} ref= { (el) => setFormRef(el) }>
                    <label className='textDanger'>{errorMessage}</label>
                     <label htmlFor='name' className='l1'>Name</label>
                     <input 
@@ -213,8 +254,10 @@ const  Join= (props) =>{
                         name='gender' 
                         id='male' 
                         value='male' 
-                        onChange={ (event)=> onInputChangeHandler(event,'gender')} 
-                        className={inputErrorClasses.genderErrorClass}/>
+                        onChange={radioButtonClickedHandler} 
+                        checked={radioValue === 'male'} 
+                        className={inputErrorClasses.genderErrorClass}
+                        />
                     
                     <label htmlFor='female'  className='l6'>Female</label>
                     <input 
@@ -222,7 +265,8 @@ const  Join= (props) =>{
                         name='gender' 
                         id='female' 
                         value='female' 
-                        onChange={ (event)=> onInputChangeHandler(event,'gender')}
+                        onChange={radioButtonClickedHandler} 
+                        checked={radioValue === 'female'} 
                         className={inputErrorClasses.genderErrorClass}
                     />  
                     </div>                  

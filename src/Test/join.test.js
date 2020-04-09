@@ -414,44 +414,6 @@ describe('Join.js tests', ()=>{
 
     });
 
-    it('Should return error when gender is empty', ()=>{
-
-        wrapper.find('input[type="text"]').first().simulate('change', {
-            target: {
-              value: 'John'
-            },
-          });
-
-          
-        const phone = wrapper.find('input').at(2);
-        phone.instance().value ='0754545454';
-        phone.simulate('change');
-
-        wrapper.find('input[type="email"]').simulate('change', {
-            target: {
-              value: 'ldd@gmial.com',
-            },
-          });
-  
-  
-          wrapper.find('input[type="password"]').simulate('change', {
-              target: {
-                value: 'fkjjjjj',
-              },
-            });
-
-            const radio = wrapper.find('input').at(5);
-            radio.instance().value ='';
-            radio.simulate('change');
-  
-            const form = wrapper.find('form');
-  
-            form.simulate('submit');
-  
-            expect( wrapper.find('.textDanger').text() ).toBe('Gender is required');
-
-    });
-
     it('Should trigger call to loadSignInPage', ()=>{
 
         expect(wrapper.find('.l7').simulate('click')).toBeTruthy();

@@ -61,18 +61,12 @@ const SignIn = props =>{
         {
             setInputErrorClasses({ emailErrorClass:'invalidField'});
             return setErrorMessage('Invalid Email');
-        }      
-
+        } 
+        
         if(formState.password.trim() === '')
         {
             setInputErrorClasses({ passwordErrorClass:'invalidField'});
-            return setErrorMessage('Password is required');  
-        }
-
-        if(formState.password.trim().length < 6)
-        {
-            setInputErrorClasses({ passwordErrorClass:'invalidField'})
-            return setErrorMessage('Password Must be atleast 6 characters');   
+            return setErrorMessage('Password is required');
         }
 
          //clear fields
@@ -107,9 +101,27 @@ const SignIn = props =>{
               
           })
           .catch(error =>{
-              setErrorMessage('Invalid Credentials!!!');
+
               setSpinner(false);
-              console.log("SIGNIN ERROR", error);
+
+              console.log("SIGNIN ERROR", error.message);
+
+              if(error.message === 'Network Error'){
+
+                return setErrorMessage(`Network error !`);
+
+              }
+
+              const status  = error.response.data.status;
+
+              if( status === 'fail'){
+
+                setErrorMessage(error.response.data.message);
+
+             }else{
+                 
+                setErrorMessage(`An error occurred !`);
+             }
           });
 
     };

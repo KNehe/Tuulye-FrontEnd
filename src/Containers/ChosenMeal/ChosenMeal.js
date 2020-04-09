@@ -21,6 +21,11 @@ const ChosenMeal = props =>{
 
     const [spinner,setSpinner] = useState(false);
 
+    const [formRef,setFormRef] = useState({});
+
+    const [radioValue, setRadioValue]= useState('airtel');
+
+
     useEffect( ()=>{
 
         const mealId = props.match.params.id;
@@ -42,10 +47,10 @@ const ChosenMeal = props =>{
 
         let inputValue = event.target.value;
         const previousState = {...inputValues};
-
-        if(inputName === 'network'){
-            setInputValues({network:inputValue,pin:previousState.pin,phone:previousState.phone});
-        }
+        
+        // if(inputName === 'network'){
+        //     setInputValues({network:inputValue,pin:previousState.pin,phone:previousState.phone});
+        // }
 
         if(inputName === 'pin'){
             setInputValues({network:previousState.network,pin:inputValue,phone:previousState.phone});
@@ -63,14 +68,18 @@ const ChosenMeal = props =>{
         event.preventDefault();
     
         const prevError = {...inputErrorClasses};
-         
-        if(inputValues.network === '' && inputValues.phone  === '' && inputValues.pin  === ''){
+        
+       
+        if(formRef[2].value === '' || formRef[3].value === '' ){
             setInputErrorClasses({phoneInputErrorClass:'invalidField',pinInputErrorClass:'invalidField'});
             return setErrorMessage('All fields are required');
         }
-        if(inputValues.network === ''){
-            return setErrorMessage('Choose a network');
+
+        if( inputValues.phone  === '' && inputValues.pin  === ''){
+            setInputErrorClasses({phoneInputErrorClass:'invalidField',pinInputErrorClass:'invalidField'});
+            return setErrorMessage('All fields are required');
         }
+       
         if(inputValues.phone ==='' ){
             setInputErrorClasses({phoneInputErrorClass:'invalidField',pinInputErrorClass:prevError.pinInputErrorClass});
             return setErrorMessage('Phone Number is required');
@@ -90,17 +99,33 @@ const ChosenMeal = props =>{
         
         setSpinner(true);
 
-        axios.post('meals/payBill',inputValues)
+
+        const data = {
+          pin: inputValues.pin,
+          phone: inputValues.phone,
+          network: radioValue
+        };
+
+        axios.post('meals/payBill',data)
             .then(response=>{
+
                 setSpinner(false);
                 setNotification({type:'success',show:true, message:''});
+
+                formRef.reset();
+
                return setTimeout(()=>{
                     setNotification({show:false});           
                 },5000);
+
             })
             .catch(error=>{
+
                 setSpinner(false);
                 setNotification({type:'danger',show:true, message:'An error occured ! Try again'});
+
+                formRef.reset();
+
                return setTimeout(()=>{
                     setNotification({show:false});           
                 },5000);
@@ -108,6 +133,12 @@ const ChosenMeal = props =>{
         
     };
     
+     const radioButtonClickedHandler = event =>{
+         
+        const radioButtonValue = event.target.value;
+        setRadioValue(radioButtonValue);       
+         
+     };
 
     const mealDisplay =  
         <MealCard 
@@ -134,17 +165,21 @@ const ChosenMeal = props =>{
                 </div>
 
                 <div className='ChosenRight'>
-                    <label className='textError'>{errorMessage}</label>
-                    <form onSubmit={onPayButtonClickedHandler}>
+                    <label className='textError' style={{ fontWeight:'bold'}}>{errorMessage}</label>
+
+                    <form onSubmit={onPayButtonClickedHandler} ref={ (el) => setFormRef(el) }>
                     <div className='Radios'>
+
                         <input type='radio' name='pay' id='airtel' value='airtel'
-                               onChange={ (event)=> onInputChangedHandler(event,'network')}/>
+                                onChange={radioButtonClickedHandler} checked={radioValue === 'airtel'} />
+
                         <label htmlFor='airtel' id='airtelLabel'>Airtel Money</label>
                         
                         <span className='SpaceBox'></span>
 
                         <input type='radio' name='pay' id='mtn' value='mtn'
-                               onChange={ (event)=> onInputChangedHandler(event,'network')}/>
+                               onChange={radioButtonClickedHandler}   checked={radioValue === 'mtn'} />
+
                         <label htmlFor='mtn' id='mtnLabel'>MTN Mobile Money</label>
                     </div>
 

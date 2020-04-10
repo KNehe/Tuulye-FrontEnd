@@ -6,6 +6,8 @@ const SHOW_BACKDROP = 'SHOW_BACKDROP';
 const HIDE_BACKDROP = 'HIDE_BACKDROP';
 const SHOW_DRAWER = 'SHOW_DRAWER';
 const HIDE_DRAWER = 'HIDE_DRAWER';
+const FORGOT_PASSWORD_EMAIL_SENT_TRUE ='FORGOT_PASSWORD_EMAIL_SENT_TRUE';
+const FORGOT_PASSWORD_EMAIL_SENT_FALSE = 'FORGOT_PASSWORD_EMAIL_SENT_FALSE';
 
 export default {
                 LOGGED_IN,LOGOUT, 
@@ -14,5 +16,7 @@ export default {
                 HIDE_DRAWER, 
                 SHOW_BACKDROP_DRAWER, 
                 HIDE_BACKDROP_DRAWER,
-                SHOW_DRAWER
+                SHOW_DRAWER,
+                FORGOT_PASSWORD_EMAIL_SENT_FALSE,
+                FORGOT_PASSWORD_EMAIL_SENT_TRUE
              };

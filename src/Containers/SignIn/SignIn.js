@@ -125,6 +125,16 @@ const SignIn = props =>{
           });
 
     };
+
+    const onForgotPasswordClickedHandler = event =>{
+
+        event.preventDefault();
+
+        props.setIsEmailSentFalse();
+
+        props.history.push('/forgotPasword');
+        
+    };
     
 
     return(
@@ -151,7 +161,7 @@ const SignIn = props =>{
                         onChange={ (event)=> onInputChangedHanlder(event,'password')} 
                         />
 
-                    <label className='label2'>Forgot password?</label>
+                    <label className='label2' onClick={onForgotPasswordClickedHandler}>Forgot password?</label>
 
                     <div className='SignBtnHolder'>
                         <Button 
@@ -184,7 +194,8 @@ const mapDispatchToProps = dispatch =>{
         onSetIsLoggedIn: ()=> dispatch({ type: actions.LOGGED_IN, value:true,
          name: localStorage.getItem('name'),
         role: localStorage.getItem('role')
-       })
+       }),
+       setIsEmailSentFalse : () => dispatch( {type: actions.FORGOT_PASSWORD_EMAIL_SENT_FALSE }),
     };
 };
 

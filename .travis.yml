@@ -12,6 +12,5 @@ cache:
 
 script:
   - npm test
-
-after_success:
-  - npm run test:coverage
+  - npm run coveralls
+  

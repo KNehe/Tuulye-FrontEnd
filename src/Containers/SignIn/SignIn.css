@@ -1,10 +1,11 @@
 .SignInMain{
     display: grid;
     grid-template-columns: repeat(12,1fr);
-    max-width: 360px;
+    width: 100%;
     margin-top: 60px;
-    height: 75.6vh;
+    height: calc(90vh - 60px);
     font-size: 4px;
+    box-sizing: border-box;
 }
 
 .SignInSection{
@@ -88,11 +89,7 @@ input[type=text]:focus{
 }
 
 @media screen and (min-width: 400px){
-    .SignInMain{
-        max-width: 1200px;
-        height: 77.8vh;
-    }
-
+   
     .SignInSection form{
         margin: 70px 20px 0px 40px;
     }
@@ -114,10 +111,6 @@ input[type=text]:focus{
 }
 
 @media screen and (min-width: 700px){
-    .SignInMain{
-        max-width:100%;
-        
-    }
     .SignInSection{
         margin: 10px 40px 0px 30px;
     }
@@ -139,10 +132,7 @@ input[type=text]:focus{
 }
 
 @media screen and (min-width: 960px){
-    .SignInMain{
-        max-width: 100%;
-        height: 73vh;
-    }
+    
     .SignInSection{
         margin: 10px 100px 0px 90px;
     }
@@ -164,12 +154,9 @@ input[type=text]:focus{
 }
 
 @media screen and (min-width:1200px){
-    .SignInMain{
-        max-width: 100%;
-    }
+    
     .ImageSection{
         border-radius: 100px 0px 0px 0px;
-        height: 78.8vh;
     }
 
     .SignInSection{

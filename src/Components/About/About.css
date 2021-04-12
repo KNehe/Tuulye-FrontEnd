@@ -1,9 +1,10 @@
 .AboutMain{
     display: grid;
     grid-template-columns: repeat(12,1fr);
-    max-width: 360px;
+    width: 100%;
     margin-top: 60px;
-    height: 75.6vh;
+    height: calc(90vh - 60px);
+    box-sizing: border-box;
     font-size: 4px;
 }
 
@@ -27,10 +28,6 @@
 
 
 @media screen and (min-width: 400px){
-    .AboutMain{
-        max-width: 1200px;
-        height: 77.8vh;
-    }
     .AboutLeft h4{
         margin: 10px 40px 0px 40px;
         font-size: 6.5em;
@@ -39,10 +36,6 @@
 }
 
 @media screen and (min-width: 700px){
-    .AboutMain{
-        max-width: 100%px;
-        height: 73vh;
-    }
     .AboutLeft h4{
         margin: 10px 40px 0px 70px;
         font-size: 7em;
@@ -51,10 +44,6 @@
 }
 
 @media screen and (min-width: 960px){
-    .AboutMain{
-        max-width: 100%;
-        height: 73vh;
-    }
     .AboutLeft h4{
         margin: 10px 100px 0px 110px;
         font-size: 8em;
@@ -62,10 +51,6 @@
 }
 
 @media screen and (min-width:1200px){
-    .AboutMain{
-        max-width: 100%;
-        height: 78.8vh;
-    }
 
     .AboutRight{
         border-radius: 100px 0px 0px 0px;

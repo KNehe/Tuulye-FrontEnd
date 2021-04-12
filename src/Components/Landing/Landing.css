@@ -1,9 +1,10 @@
 .Main{
     display: grid;
     grid-template-columns: repeat(12,1fr);
-    max-width: 360px;
+    width: 100%;
     margin-top: 60px;
-    height: 75.6vh;
+    height: calc(90vh - 60px);
+    box-sizing: border-box;
 }
 
 /* left div styles for  mobile */
@@ -44,10 +45,6 @@ p{
 
 
 @media screen and (min-width: 400px){
-    .Main{
-        max-width: 1200px;
-        height: 77.8vh;
-    }
     .Text1,.Text2{
         font-size: 35px;
     }
@@ -64,8 +61,7 @@ p{
 }
 
 
-@media screen and (min-width: 858px){
-    
+@media screen and (min-width: 858px){   
     .Text1,.Text2{
         font-size: 40px;
         margin-left: 100px;
@@ -88,9 +84,6 @@ p{
 
 /*tablets and small laptops*/
 @media screen and (min-width: 960px){
-    .Main{
-        max-width: 1200px;
-    }
     .Text1,.Text2{
         font-size: 50px;
         margin-left: 80px;
@@ -114,10 +107,6 @@ p{
 
 /*Desktop styles*/
 @media screen and (min-width: 1200px){
-    .Main{
-        max-width: 100%;
-        height: 78.8vh;
-    }
     .Text1,.Text2{
         font-size: 60px;
         margin-left: 150px;

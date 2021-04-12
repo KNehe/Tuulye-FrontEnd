@@ -1,10 +1,11 @@
 import axios from 'axios';
 
-const baseOnlineUrl = 'https://tuulye.herokuapp.com/';
+const baseOnlineUrl = 'https://tuulye.herokuapp.com/api/v1/';
+
 const baseLocalUrl = 'http://127.0.0.1:3000/api/v1/';
 
 const instance = axios.create({
-    baseURL: baseLocalUrl
+    baseURL: baseOnlineUrl
 });
 
 instance.defaults.headers['authorization'] = 'Bearer ' + localStorage.getItem('token');
